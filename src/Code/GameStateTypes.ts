@@ -1,7 +1,8 @@
-export interface CurrentMoney {
+export type MoneyState = {
     amount: Number
+    incomePerSec: number
 }
-  
-export interface GameState {
-    money: CurrentMoney
+
+export type GameState = {
+    HackerTargetBulliesCount: number
 }

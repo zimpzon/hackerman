@@ -1,15 +1,12 @@
-import { CurrentMoney } from "../Code/GameStateTypes";
+import { MoneyState } from "../Code/GameStateTypes";
 
-interface MoneyOverviewProps {
-  money: CurrentMoney
-}
-
-function MoneyOverview(props: MoneyOverviewProps) {
-  const ss = ''
+function MoneyOverview(state: MoneyState) {
   return (
     <>
-      <div className="currentMoney">${props.money.amount.toString()}</div>
-      <div>per second: $0</div>
+      <div className="MoneyOverview">
+        <div className="currentMoney">${state.amount.toString()}</div>
+        <div>per second: ${state.incomePerSec.toString()}</div>
+      </div>
     </>
   );
 }

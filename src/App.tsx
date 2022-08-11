@@ -1,26 +1,33 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import MoneyOverview from './Components/MoneyOverview';
-import Title from './Components/Title';
-import { loadGameState } from './Code/SaveGame';
+import { useEffect, useState } from "react";
+import "./App.css";
+import MoneyOverview from "./Components/MoneyOverview";
+import { loadMoneyState } from "./Code/GameState";
+import ManualWorkButton from "./Components/ManualWorkButton";
+import HintText from "./Components/HintText";
 
 function App() {
-  const [gameState, setGameState] = useState(loadGameState())
+  const [moneyState, setMoneyState] = useState(loadMoneyState());
   const [time, setTime] = useState(Date.now());
 
-  // TODO: easy way out for perf is to split state into parts. Load and save can still use a parent for a single JSON.
-  // Volatile and non-volatile parts?
   useEffect(() => {
     const interval = setInterval(() => setTime(Date.now()), 500);
     return () => {
       clearInterval(interval);
     };
   }, []);
-  
+
   return (
-    <div className="App">
-      <Title/>
-      <MoneyOverview money={gameState.money}/>
+    <div className="columns">
+      <div className="column">
+        <MoneyOverview
+          amount={moneyState.amount}
+          incomePerSec={moneyState.incomePerSec}
+        />
+        <ManualWorkButton />
+        <HintText />
+      </div>
+      <div className="column">middle</div>
+      <div className="column">right</div>
     </div>
   );
 }
