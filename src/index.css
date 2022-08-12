@@ -18,46 +18,53 @@ code {
 .columns {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	width: 100%;
 }
 
 .column {
-	margin: 10px;
+	margin: 2px;
 	flex: 33.33%;
 }
 
-.row:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-.MoneyOverview {
+#moneyOverview {
 	width: 100%;
 	margin:auto;
 	text-align: center;
+
 }
 
-.ManualWorkButton {
-	margin: 20px;
-	width: 100%;
+#incomeLabel {
+	font-size: 0.6em;
+}
+
+#manualWorkButton {
+	width: 80%;
 	height: 40px;
 	display: block;
-	margin:auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left:auto;
+	margin-right:auto;
 	text-align: center;
 }
 
-.ManualWorkText {
+#manualWorkIncome {
 	text-align: center;
 	font-weight: lighter;
 	font-size: 0.6em;
 	margin: 4px;
 }
 
+.col1, .col2, .col3 {
+	border-style: solid;
+	border-color: black;
+}
+
 .HintText {
 	font-size: 0.8em;
 	font-weight: lighter;
+	text-align: center;
 }
 
 * {

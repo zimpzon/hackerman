@@ -1,14 +1,14 @@
-import { Button } from "react-bootstrap";
+interface ManualWorkButtonProps {
+  onClick: () => void;
+}
 
-function ManualWorkButton() {
+function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
   return (
     <>
-      <div className="ManualWorkButton">
-        <button>
-          Boring work
-          <div className="ManualWorkText">$0.1</div>
-        </button>
-      </div>{" "}
+      <button id="manualWorkButton" onClick={onClick}>
+        Boring work
+        <div id="manualWorkIncome">$0.1</div>
+      </button>
     </>
   );
 }

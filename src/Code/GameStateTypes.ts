@@ -1,5 +1,5 @@
 export type MoneyState = {
-    amount: Number
+    amount: number
     incomePerSec: number
 }
 

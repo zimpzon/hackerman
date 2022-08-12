@@ -1,33 +1,34 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import MoneyOverview from "./Components/MoneyOverview";
-import { loadMoneyState } from "./Code/GameState";
 import ManualWorkButton from "./Components/ManualWorkButton";
 import HintText from "./Components/HintText";
+import { onManualWorkClick, startGame, stopGame } from "./Code/bl";
+import { useEffect } from "react";
+import BuyCpuButton from "./Components/BuyCpuButton";
 
 function App() {
-  const [moneyState, setMoneyState] = useState(loadMoneyState());
-  const [time, setTime] = useState(Date.now());
-
   useEffect(() => {
-    const interval = setInterval(() => setTime(Date.now()), 500);
+    startGame();
     return () => {
-      clearInterval(interval);
+      stopGame();
     };
   }, []);
 
+  console.log("render app");
+
   return (
     <div className="columns">
-      <div className="column">
-        <MoneyOverview
-          amount={moneyState.amount}
-          incomePerSec={moneyState.incomePerSec}
-        />
-        <ManualWorkButton />
-        <HintText />
+      <div className="column col1">
+        <MoneyOverview />
+        <ManualWorkButton onClick={onManualWorkClick} />
       </div>
-      <div className="column">middle</div>
-      <div className="column">right</div>
+
+      <div className="column col2">
+        <HintText />
+        <BuyCpuButton />
+      </div>
+
+      <div className="column col3">targets</div>
     </div>
   );
 }
