@@ -1,11 +1,18 @@
-import { Button } from "react-bootstrap";
+import { formatHz } from "../../Code/format";
 
-function BuyCpuButton() {
+interface BuyCpuButtonProps {
+  disabled: boolean;
+  hz: number;
+  price: number;
+  onClick: () => void;
+}
+
+function BuyCpuButton({ disabled, hz, price, onClick }: BuyCpuButtonProps) {
   return (
     <>
-      <button id="buyCpuButton">
-        1 Hz CPU
-        <div id="buyCpuButtonPrice">$1</div>
+      <button id="buyCpuButton" disabled={disabled} onClick={onClick}>
+        {formatHz(hz)} CPU
+        <div id="buyCpuButtonPrice">${price}</div>
       </button>
     </>
   );
