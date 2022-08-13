@@ -1,71 +1,54 @@
 import { useState } from "react";
-import App, { useForceUpdate } from "../App";
+import GameState from "./GameState";
 
-let timerObject: NodeJS.Timer;
-let moneyLabel: HTMLLabelElement;
-let incomeLabel: HTMLLabelElement;
+class bl {
+    public static instance: bl = new bl()
 
-// progress bars not for hacking targets. Couple to CPU's somehow.
+    public static readonly tickMs = 100.0
+    public static readonly perSecMul = 1.0 / (1000 / bl.tickMs)
 
-// TODO:
-// Buy CPU active = hazMoney (generic mechanism, more will come)
-// Show CPU's (QUICK, text labels will do for now)
+    moneyLabel: HTMLLabelElement | undefined = undefined;
+    incomeLabel: HTMLLabelElement | undefined = undefined;
 
+    public init() {
+        console.log('starting game...')
+        this.moneyLabel = document.getElementById('moneyLabel') as HTMLLabelElement
+        this.incomeLabel = document.getElementById('incomeLabel') as HTMLLabelElement
 
-export const tickMs = 100.0
-const perSecMul = 1.0 / (1000 / tickMs)
+    }
 
-type gameStateType = {
-    money: number
-    income: number
-    manualWorkValue: number
-    cpus: Map<number, number>
-}
+    public stop() {
+        console.log('stopping game...')
+    }
 
-export let gameState: gameStateType = {
-    money: 0,
-    income: 0,
-    manualWorkValue: 0.1,
-    cpus: new Map<number, number>(),
-}
+    constructor() {
+        GameState.load()
+    }
 
-let nextUpdate = Date.now()
+    private updateMoneyLabels() {
+        const displayMoney = GameState.current.money.toFixed(2)
+        const displayIncome = GameState.current.income.toFixed(2)
+        
+        this.moneyLabel!.innerText = `$${displayMoney}`
+        this.incomeLabel!.innerText = `per second: $${displayIncome}`
+    }
 
-export const blTick = () => {
-    console.log(gameState.income * perSecMul)
-    gameState.money = gameState.money + gameState.income * perSecMul
+    public getCpuOwnedCount(hz: number): number {
+        return GameState.current.cpus.get(1) ?? 0
+    }
 
-    const displayMoney = gameState.money.toFixed(2)
-    const displayIncome = gameState.income.toFixed(2)
-    
-    moneyLabel.innerText = `$${displayMoney}`
-    incomeLabel.innerText = `per second: $${displayIncome}`
+    private tick() {
+        GameState.current.money = GameState.current.money + GameState.current.income * bl.perSecMul
+        this.updateMoneyLabels()
+    }
 
-    if (Date.now() > nextUpdate) {
-        nextUpdate = Date.now() + 1000
-        forceUpdate2()
+    private calcIncome(): number {
+        return 0.0
+    }
+
+    public onManualWorkDone() {
+        GameState.current.money += GameState.current.manualWorkValue
     }
 }
 
-function calcIncome(): number {
-    return 0.0
-}
-
-export function onManualWorkDone() {
-    gameState.money += gameState.manualWorkValue
-}
-
-export const stopGame = () => {
-    console.log('stopping game...')
-}
-
-let forceUpdate2: () => void = () => {}
-
-export const startGame = (forceUpdate: () => void) => {
-    forceUpdate2 = forceUpdate
-    console.log('starting game...')
-    moneyLabel = document.getElementById('moneyLabel') as HTMLLabelElement
-    incomeLabel = document.getElementById('incomeLabel') as HTMLLabelElement
-
-    gameState.income = calcIncome()
-}
+export default bl
