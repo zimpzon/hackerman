@@ -10,22 +10,21 @@ class GameState {
 
     public static current: gameStateType = {
         money: 0,
-        income: 0,
+        income: 0.2,
         manualWorkValue: 0.1,
-        cpus: new Map<number, number>
+        cpus: new Map<number, number>()
     }
 
-    public static load(): GameState {
+    public static load() {
         const json = localStorage.getItem(GameState.storageKey)
-        if (json)
-            return JSON.parse(json) as GameState
-            
-        const newState = { } as GameState
-        return newState
+        if (!json)
+            return
+
+        GameState.current = JSON.parse(json) as gameStateType
     }
     
-    public static save(gameState: GameState) {
-        const json = JSON.stringify(gameState)
+    public static save() {
+        const json = JSON.stringify(GameState.current)
         localStorage.setItem(GameState.storageKey, json)
     }
 }

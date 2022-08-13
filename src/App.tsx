@@ -2,14 +2,14 @@ import "./App.css";
 import MoneyOverview from "./Components/MoneyOverview";
 import ManualWorkButton from "./Components/ManualWorkButton";
 import HintText from "./Components/HintText";
-import { useEffect } from "react";
 import BuyCpuButtonsHax from "./Components/BuyCpuButtonsHax";
 import CpuListHax from "./Components/CpuListHax";
 import bl from "./Code/bl";
+import { useEffect } from "react";
 
 export function App() {
   useEffect(() => {
-    bl.instance.init();
+    bl.instance = new bl();
     return () => {
       bl.instance.stop();
     };
@@ -21,7 +21,7 @@ export function App() {
     <div className="columns">
       <div className="column col1">
         <MoneyOverview />
-        <ManualWorkButton onClick={bl.instance.onManualWorkDone} />
+        <ManualWorkButton onClick={bl.onManualWorkDone} />
       </div>
 
       <div className="column col2">
