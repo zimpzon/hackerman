@@ -1,7 +1,8 @@
+import React from "react";
 import GameState from "../../Code/GameState";
 
 interface ManualWorkButtonProps {
-  onClick: () => void;
+  onClick: (event: React.MouseEvent) => void;
 }
 
 function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {

@@ -4,8 +4,8 @@ function MoneyOverview() {
   return (
     <>
       <div id="moneyOverview">
-        <div id="moneyLabel">$0</div>
-        <div id="incomeLabel">per second: $0</div>
+        <h2 id="moneyLabel">$0</h2>
+        <h2 id="incomeLabel">per second: $0</h2>
       </div>
     </>
   );

@@ -13,7 +13,7 @@ function CpuListHax() {
   for (let i = 0; i < GameState.current.cpuCount; ++i)
     myCpus.push(<Cpu mhz={GameState.current.cpuMzh} key={i} />);
 
-  return <>{myCpus}</>;
+  return <><div id="cpuList">{myCpus}</div></>;
 }
 
 export default CpuListHax;

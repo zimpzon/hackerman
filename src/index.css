@@ -15,6 +15,21 @@ code {
 
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
+@keyframes textFloatAnim {
+    0%   { transform: translate(-50%, -20px); opacity: 1.0; }
+    50% { transform: translate(-50%, -100px); opacity: 0.0; }
+}
+
+.money-float {
+	color:black;
+	pointer-events: none;
+	position: absolute;
+	animation: textFloatAnim 6s;
+	animation-timing-function: ease-out;
+	text-align: center;
+	transform: translate(-50%, -50%);
+}
+
 .columns {
 	display: flex;
 	flex-direction: row;
@@ -32,6 +47,28 @@ code {
 	margin:auto;
 	text-align: center;
 
+}
+
+#cpuList {
+	display: inline;
+	border-style: solid;
+}
+
+.cpu {
+	display: inline;
+	flex-wrap: nowrap;
+	border-style: solid;
+}
+
+#buyCpuButton {
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+	flex-wrap: nowrap;
+	border-style: solid;
 }
 
 #incomeLabel {
@@ -68,6 +105,7 @@ code {
 }
 
 * {
+	user-select: none;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }

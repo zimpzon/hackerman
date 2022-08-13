@@ -7,7 +7,7 @@ interface CpuProps {
 function Cpu({ mhz }: CpuProps) {
   return (
     <>
-      <div id="moneyOverview">I own: {formatMhz(mhz)}</div>
+      <div className="cpu">I own: {formatMhz(mhz)}</div>
     </>
   );
 }
