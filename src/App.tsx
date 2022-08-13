@@ -2,18 +2,30 @@ import "./App.css";
 import MoneyOverview from "./Components/MoneyOverview";
 import ManualWorkButton from "./Components/ManualWorkButton";
 import HintText from "./Components/HintText";
-import { gameState, onManualWorkDone, startGame, stopGame } from "./Code/bl";
+import { blTick, gameState, onManualWorkDone, startGame, stopGame, tickMs } from "./Code/bl";
 import { useEffect, useState } from "react";
 import BuyCpuButton from "./Components/BuyCpuButton";
 import { calcCpuPrice, onBuyCpu } from "./Code/bl_buying";
 import Cpu from "./Components/CPU";
 
+export function useForceUpdate(): any  {
+  const [value, setValue] = useState(0);
+  return () => setValue(Date.now())
+}
+
+const appTick = () => {
+  blTick()
+}
+
 export function App() {
-  const [triggerUpdate, setTriggerUpdate] = useState();
+  const forceUpdate = useForceUpdate()
+  let timerObject: any = undefined
 
   useEffect(() => {
-    startGame();
+    startGame(forceUpdate);
+    timerObject = setInterval(appTick, tickMs);
     return () => {
+      clearInterval(timerObject)
       stopGame();
     };
   }, []);

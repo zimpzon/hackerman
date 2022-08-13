@@ -1,5 +1,5 @@
 import { useState } from "react";
-import App from "../App";
+import App, { useForceUpdate } from "../App";
 
 let timerObject: NodeJS.Timer;
 let moneyLabel: HTMLLabelElement;
@@ -12,7 +12,7 @@ let incomeLabel: HTMLLabelElement;
 // Show CPU's (QUICK, text labels will do for now)
 
 
-const tickMs = 100.0
+export const tickMs = 100.0
 const perSecMul = 1.0 / (1000 / tickMs)
 
 type gameStateType = {
@@ -22,11 +22,6 @@ type gameStateType = {
     cpus: Map<number, number>
 }
 
-export function updateUiHooks():  {
-    const [triggerUpdate, setTriggerUpdate] = useState();
-    return number
-}
-  
 export let gameState: gameStateType = {
     money: 0,
     income: 0,
@@ -36,7 +31,7 @@ export let gameState: gameStateType = {
 
 let nextUpdate = Date.now()
 
-const tick = () => {
+export const blTick = () => {
     console.log(gameState.income * perSecMul)
     gameState.money = gameState.money + gameState.income * perSecMul
 
@@ -47,7 +42,8 @@ const tick = () => {
     incomeLabel.innerText = `per second: $${displayIncome}`
 
     if (Date.now() > nextUpdate) {
-        App.prototype.settr
+        nextUpdate = Date.now() + 1000
+        forceUpdate2()
     }
 }
 
@@ -61,15 +57,15 @@ export function onManualWorkDone() {
 
 export const stopGame = () => {
     console.log('stopping game...')
-    clearInterval(timerObject)
 }
 
-export const startGame = () => {
+let forceUpdate2: () => void = () => {}
+
+export const startGame = (forceUpdate: () => void) => {
+    forceUpdate2 = forceUpdate
     console.log('starting game...')
     moneyLabel = document.getElementById('moneyLabel') as HTMLLabelElement
     incomeLabel = document.getElementById('incomeLabel') as HTMLLabelElement
 
     gameState.income = calcIncome()
-
-    timerObject = setInterval(tick, tickMs);
 }
