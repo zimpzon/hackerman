@@ -1,13 +1,13 @@
-import { formatHz } from "../../Code/format";
+import { formatMhz } from "../../Code/format";
 
 interface CpuProps {
-  hz: number;
+  mhz: number;
 }
 
-function Cpu({ hz }: CpuProps) {
+function Cpu({ mhz }: CpuProps) {
   return (
     <>
-      <div id="moneyOverview">I own: {formatHz(hz)}</div>
+      <div id="moneyOverview">I own: {formatMhz(mhz)}</div>
     </>
   );
 }

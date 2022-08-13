@@ -35,10 +35,6 @@ class bl {
         this.incomeLabel!.innerText = `per second: $${displayIncome}`
     }
 
-    public getCpuOwnedCount(hz: number): number {
-        return GameState.current.cpus.get(hz) ?? 0
-    }
-
     public updateCpuUI() {
         ForceUpdate.updateBuyCpuButtons()
         ForceUpdate.updateCpuList()

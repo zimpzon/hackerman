@@ -1,8 +1,11 @@
+import GameData from "./GameData"
+
 type gameStateType = {
     money: number
     income: number
     manualWorkValue: number
-    cpus: Map<number, number>
+    cpuCount: number
+    cpuMzh: number
 }
 
 class GameState {
@@ -10,9 +13,10 @@ class GameState {
 
     public static current: gameStateType = {
         money: 0,
-        income: 0.2,
-        manualWorkValue: 0.1,
-        cpus: new Map<number, number>()
+        income: 0,
+        manualWorkValue: GameData.manualWorkBasePrice,
+        cpuCount: 0,
+        cpuMzh: GameData.cpuBaseMhz,
     }
 
     public static load() {

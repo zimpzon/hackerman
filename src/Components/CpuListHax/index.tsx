@@ -10,9 +10,8 @@ function CpuListHax() {
   console.log("render cpu list");
 
   const myCpus: JSX.Element[] = [];
-  GameState.current.cpus.forEach((count, hz) => {
-    for (let i = 0; i < count; ++i) myCpus.push(<Cpu hz={hz} key={i} />);
-  });
+  for (let i = 0; i < GameState.current.cpuCount; ++i)
+    myCpus.push(<Cpu mhz={GameState.current.cpuMzh} key={i} />);
 
   return <>{myCpus}</>;
 }

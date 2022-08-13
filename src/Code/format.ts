@@ -1,5 +1,4 @@
-export function formatHz(hz: number) {
-    if (hz < 1000) return `${hz} Hz`;
-    return 'missing format'
+export function formatMhz(mhz: number) {
+    return `${mhz} Mhz`;
   }
   

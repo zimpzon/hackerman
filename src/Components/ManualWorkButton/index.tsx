@@ -1,3 +1,5 @@
+import GameState from "../../Code/GameState";
+
 interface ManualWorkButtonProps {
   onClick: () => void;
 }
@@ -7,7 +9,9 @@ function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
     <>
       <button id="manualWorkButton" onClick={onClick}>
         Boring work
-        <div id="manualWorkIncome">$0.1</div>
+        <div id="manualWorkIncome">
+          per click: ${GameState.current.manualWorkValue}
+        </div>
       </button>
     </>
   );

@@ -1,4 +1,5 @@
 import bl from "./bl"
+import GameData from "./GameData"
 import GameState from "./GameState"
 
 class Shop {
@@ -7,24 +8,22 @@ class Shop {
             throw new Error(`cannot afford ${what}, price: ${price}, has: ${GameState.current.money} `)
     }
     
-    public static cpuPrice(hz: number) {
-        const ownedCount = GameState.current.cpus.get(hz) ?? 0
-        return hz * (ownedCount + 1)
+    public static cpuPrice() {
+        return Math.round(GameData.cpuBasePrice * Math.pow(GameData.cpuPriceExp, GameState.current.cpuCount))
     }
 
-    public static buyCpu(hz: number) {
-        const ownedCount = GameState.current.cpus.get(hz) ?? 0
-        const price = Shop.cpuPrice(hz)
+    public static buyCpu() {
+        const price = Shop.cpuPrice()
         Shop.assertCanAfford(price, 'cpu')
 
         GameState.current.money -= price
-        GameState.current.cpus.set(hz, ownedCount + 1)
+        GameState.current.cpuCount++
 
         bl.instance.updateCpuUI()
     }
 
-    public static canAffordCpu(hz: number) {
-        const price = Shop.cpuPrice(hz)
+    public static canAffordCpu() {
+        const price = Shop.cpuPrice()
         return price <= GameState.current.money
     }
 }
