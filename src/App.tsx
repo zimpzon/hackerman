@@ -8,6 +8,7 @@ import bl from "./Code/bl";
 import { useEffect, useState } from "react";
 import GameState from "./Code/GameState";
 import ForceUpdate from "./Code/ForceUpdate";
+import TargetList from "./Components/TargetList";
 
 export function App() {
   useEffect(() => {
@@ -38,7 +39,9 @@ export function App() {
         <ManualWorkButton onClick={bl.onManualWorkDone} />
         <HintText />
       </div>
-      <div className="column col3">Hacking Targets</div>
+      <div className="column col3">
+        <TargetList />
+      </div>
     </div>
   );
 }

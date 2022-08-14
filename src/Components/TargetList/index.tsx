@@ -5,16 +5,18 @@ import Target from "../Target";
 
 function TargetList() {
   const [_, setForceUpdate] = useState(0);
-  ForceUpdate.setShowCpuListTick = setForceUpdate;
+  ForceUpdate.setShowTargetListTick = setForceUpdate;
 
   console.log("render hacking target list");
+
+  const showTargetBullies = true; //GameState.current.targetBulliesCount > 0;
 
   return (
     <>
       <div className="targetList">
-        {GameState.current.targetBulliesCount > 0 && (
+        {showTargetBullies && (
           <Target
-            name={"School bullies"}
+            name={"Target One"}
             count={GameState.current.targetBulliesCount}
             price={0}
           />

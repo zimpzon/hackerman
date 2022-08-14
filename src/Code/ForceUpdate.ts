@@ -14,9 +14,15 @@ class ForceUpdate {
             this.setShowCpuListTick(Date.now())
     }
 
+    public static updateTargetList() {
+        if (this.setShowTargetListTick)
+            this.setShowTargetListTick(Date.now())
+    }
+
     public static setAppTick : any
     public static setBuyCpuButtonsTick : any
     public static setShowCpuListTick : any
+    public static setShowTargetListTick : any
 }
 
 export default ForceUpdate
