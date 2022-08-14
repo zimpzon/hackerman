@@ -9,15 +9,29 @@ function TargetList() {
 
   console.log("render hacking target list");
 
-  const showTargetBullies = true; //GameState.current.targetBulliesCount > 0;
+  const showtargetOne = true; //GameState.current.targetOneCount > 0;
 
   return (
     <>
       <div className="targetList">
-        {showTargetBullies && (
+        {showtargetOne && (
           <Target
             name={"Target One"}
-            count={GameState.current.targetBulliesCount}
+            count={GameState.current.targetOneCount}
+            price={0}
+          />
+        )}
+        {showtargetOne && (
+          <Target
+            name={"Target Two"}
+            count={GameState.current.targetOneCount}
+            price={0}
+          />
+        )}
+        {showtargetOne && (
+          <Target
+            name={"Target Three"}
+            count={GameState.current.targetOneCount}
             price={0}
           />
         )}

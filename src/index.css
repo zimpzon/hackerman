@@ -26,16 +26,18 @@ code {
 }
 
 .money-float {
-	color:black;
+	color:white;
 	text-shadow: white 0px 0px 5px;
-	font-weight: bold;
-	font-size: small;
+	font-weight: normal;
+	font-size: medium;
 	pointer-events: none;
 	position: absolute;
-	animation: textFloatAnim 6s;
+	animation: textFloatAnim 4s;
+	animation-direction: normal;
 	animation-timing-function: ease-out;
 	text-align: center;
 	transform: translate(-50%, -50%);
+	text-shadow: white 0px 0px 5px;
 }
 
 .horzDivider {
@@ -48,6 +50,10 @@ code {
 
 #moneyLabel {
 	text-shadow: white 0px 0px 5px;
+}
+
+h2 {
+	margin: 0px;
 }
 
 #moneyOverview {

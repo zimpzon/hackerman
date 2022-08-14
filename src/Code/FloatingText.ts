@@ -6,7 +6,7 @@ interface Floater {
 class FloatingText {
     private moneyFloatTemplate: HTMLTemplateElement | undefined
     private floats: Floater[] = []
-    private transTime: number = 3100
+    private transTime: number = 2000
 
     constructor() {
         this.moneyFloatTemplate = document.getElementById('money-float-template') as HTMLTemplateElement

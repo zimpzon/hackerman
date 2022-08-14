@@ -8,7 +8,7 @@ type gameStateType = {
     showTargetsPane: boolean
     showRobotsPane: boolean
     cpuCount: number
-    targetBulliesCount: number
+    targetOneCount: number
     cpuMzh: number
 }
 
@@ -24,7 +24,7 @@ class GameState {
         showRobotsPane: false,
         cpuCount: 0,
         cpuMzh: GameData.cpuBaseMhz,
-        targetBulliesCount: 1,
+        targetOneCount: 1,
     }
 
     public static load() {

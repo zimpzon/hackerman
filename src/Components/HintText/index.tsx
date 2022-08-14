@@ -1,7 +1,7 @@
 function HintText() {
-  const hint1: string = "Save up for a computer.";
+  const hint1: string = "You are hard at work at your desk, clicking keys and moving mice.";
 
-  const hint2: string = "Buy some hacking targets.";
+  const hint2: string = "All your clicking has paid off, you can now afford your very own CPU. The first of many.";
 
   return (
     <>

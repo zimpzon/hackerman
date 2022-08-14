@@ -36,8 +36,10 @@ export function App() {
       <div className="column col2">
         <MoneyOverview />
         <hr className="horzDivider" />
-        <ManualWorkButton onClick={bl.onManualWorkDone} />
         <HintText />
+        <hr className="horzDivider" />
+        <ManualWorkButton onClick={bl.onManualWorkDone} />
+        <hr className="horzDivider" />
       </div>
       <div className="column col3">
         <TargetList />

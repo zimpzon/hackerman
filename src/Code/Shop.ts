@@ -13,7 +13,7 @@ class Shop {
     }
 
     public static schoolBulliesPrice() {
-        return Math.round(GameData.targetBulliesBasePrice * Math.pow(GameData.targetBulliesPriceExp, GameState.current.targetBulliesCount))
+        return Math.round(GameData.targetOneBasePrice * Math.pow(GameData.targetOnePriceExp, GameState.current.targetOneCount))
     }
 
     public static buyCpu() {

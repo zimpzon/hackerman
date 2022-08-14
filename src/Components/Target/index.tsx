@@ -8,7 +8,7 @@ function Target({ name, count, price }: TargetProps) {
   return (
     <>
       <div className="target">
-        <div className="targetBulliesImage" />
+        <div className="targetOneImage" />
         <div className="targetData">
           <div className="targetCount">{count}</div>
           <div className="targetName">{name}</div>

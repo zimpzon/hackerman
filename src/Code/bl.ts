@@ -1,4 +1,3 @@
-import { HtmlHTMLAttributes } from "react";
 import FloatingText from "./FloatingText";
 import ForceUpdate from "./ForceUpdate";
 import GameData from "./GameData";
@@ -33,8 +32,15 @@ class bl {
         GameState.load()
     }
 
+    prevMoney: number = -1
+
     private updateMoneyLabels() {
+        if (GameState.current.money === this.prevMoney)
+            return;
+        this.prevMoney = GameState.current.money;
+
         const diff = GameState.current.money - this.moneyDisplayValue
+       
         // step is x% of missing value, but clamped at a minimum % of total value
         const change = Math.sign(diff) * Math.max(Math.abs(diff * 0.47), 10)
         this.moneyDisplayValue += change
@@ -45,6 +51,20 @@ class bl {
         const displayIncome = GameState.current.income.toFixed(2)
         
         this.moneyLabel!.innerText = `$${displayMoney}`
+
+        const animColor: Keyframe[] = [
+            { color: 'black',  },
+            { color: 'grey' },
+            { color: 'black' },
+          ];
+          
+          const animTiming: KeyframeAnimationOptions = {
+            duration: 500,
+            iterations: 1,
+            easing: 'ease-out'
+          }
+        
+        this.moneyLabel!.animate(animColor, animTiming)
     }
 
     public updateCpuUI() {

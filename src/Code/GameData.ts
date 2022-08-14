@@ -4,8 +4,8 @@ class GameData {
     public static cpuBasePrice: number = 2
     public static cpuPriceExp: number = 1.25
     public static showFirstCpusAt: number = 1
-    public static targetBulliesBasePrice: number = 100
-    public static targetBulliesPriceExp: number = 1.25
+    public static targetOneBasePrice: number = 100
+    public static targetOnePriceExp: number = 1.25
 }
 
 export default GameData

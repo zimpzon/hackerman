@@ -1,17 +1,35 @@
 import React from "react";
-import GameState from "../../Code/GameState";
 
 interface ManualWorkButtonProps {
   onClick: (event: React.MouseEvent) => void;
 }
 
 function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
+  const animPushDown: Keyframe[] = [
+    { transform: 'scale(1)' },
+    { transform: 'scale(0.95)' },
+    { transform: 'scale(1)' },
+  ];
+  
+  const animTiming: KeyframeAnimationOptions = {
+    duration: 100,
+    iterations: 1,
+    easing: 'ease-out'
+  }
+
+  const click = (e: React.MouseEvent) => {
+    const element = e.currentTarget as HTMLElement
+    element.animate(animPushDown, animTiming)
+
+    onClick(e)
+  }
+
   return (
     <>
-      <button id="manualWorkButton" onClick={onClick}>
-        Boring work
+      <div id="manualWorkButton" onClick={click}>
+        Click, click, click...
         <div id="manualWorkIncome"></div>
-      </button>
+      </div>
     </>
   );
 }
