@@ -1,5 +1,3 @@
-import { formatMhz } from "../../Code/format";
-
 interface BuyCpuButtonProps {
   disabled: boolean;
   mhz: number;
@@ -11,7 +9,7 @@ function BuyCpuButton({ disabled, mhz, price, onClick }: BuyCpuButtonProps) {
   return (
     <>
       <button id="buyCpuButton" disabled={disabled} onClick={onClick}>
-        {formatMhz(mhz)} CPU
+        Buy CPU
         <div id="buyCpuButtonPrice">${price}</div>
       </button>
     </>

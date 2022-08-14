@@ -1,14 +1,20 @@
-import { useState } from "react";
-
 class ForceUpdate {
+    public static updateApp() {
+        if (this.setAppTick)
+            this.setAppTick(Date.now())
+    }
+
     public static updateBuyCpuButtons() {
-        this.setBuyCpuButtonsTick(Date.now())
+        if (this.setBuyCpuButtonsTick)
+            this.setBuyCpuButtonsTick(Date.now())
     }
 
     public static updateCpuList() {
-        this.setShowCpuListTick(Date.now())
+        if (this.setShowCpuListTick)
+            this.setShowCpuListTick(Date.now())
     }
 
+    public static setAppTick : any
     public static setBuyCpuButtonsTick : any
     public static setShowCpuListTick : any
 }

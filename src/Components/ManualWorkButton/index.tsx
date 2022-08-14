@@ -10,9 +10,7 @@ function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
     <>
       <button id="manualWorkButton" onClick={onClick}>
         Boring work
-        <div id="manualWorkIncome">
-          per click: ${GameState.current.manualWorkValue}
-        </div>
+        <div id="manualWorkIncome"></div>
       </button>
     </>
   );

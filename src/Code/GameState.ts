@@ -4,7 +4,11 @@ type gameStateType = {
     money: number
     income: number
     manualWorkValue: number
+    showCpuPane: boolean
+    showTargetsPane: boolean
+    showRobotsPane: boolean
     cpuCount: number
+    targetBulliesCount: number
     cpuMzh: number
 }
 
@@ -15,8 +19,12 @@ class GameState {
         money: 0,
         income: 0,
         manualWorkValue: GameData.manualWorkBasePrice,
+        showCpuPane: false,
+        showTargetsPane: false,
+        showRobotsPane: false,
         cpuCount: 0,
         cpuMzh: GameData.cpuBaseMhz,
+        targetBulliesCount: 1,
     }
 
     public static load() {

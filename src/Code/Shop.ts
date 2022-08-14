@@ -12,6 +12,10 @@ class Shop {
         return Math.round(GameData.cpuBasePrice * Math.pow(GameData.cpuPriceExp, GameState.current.cpuCount))
     }
 
+    public static schoolBulliesPrice() {
+        return Math.round(GameData.targetBulliesBasePrice * Math.pow(GameData.targetBulliesPriceExp, GameState.current.targetBulliesCount))
+    }
+
     public static buyCpu() {
         const price = Shop.cpuPrice()
         Shop.assertCanAfford(price, 'cpu')

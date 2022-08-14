@@ -5,7 +5,9 @@ import HintText from "./Components/HintText";
 import BuyCpuButtonsHax from "./Components/BuyCpuButtonsHax";
 import CpuListHax from "./Components/CpuListHax";
 import bl from "./Code/bl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import GameState from "./Code/GameState";
+import ForceUpdate from "./Code/ForceUpdate";
 
 export function App() {
   useEffect(() => {
@@ -15,22 +17,28 @@ export function App() {
     };
   }, []);
 
+  const [_, setForceUpdate] = useState(0);
+  ForceUpdate.setAppTick = setForceUpdate;
+
   console.log("render app");
 
   return (
     <div className="columns">
       <div className="column col1">
-        <MoneyOverview />
-        <ManualWorkButton onClick={bl.onManualWorkDone} />
+        {GameState.current.showCpuPane && (
+          <>
+            <BuyCpuButtonsHax />
+            <CpuListHax />
+          </>
+        )}
       </div>
-
       <div className="column col2">
+        <MoneyOverview />
+        <hr className="horzDivider" />
+        <ManualWorkButton onClick={bl.onManualWorkDone} />
         <HintText />
-        <BuyCpuButtonsHax />
-        <CpuListHax />
       </div>
-
-      <div className="column col3">targets</div>
+      <div className="column col3">Hacking Targets</div>
     </div>
   );
 }

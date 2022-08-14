@@ -1,11 +1,7 @@
 function HintText() {
-  console.log("hint");
+  const hint1: string = "Save up for a computer.";
 
-  const hint1: string =
-    "Boring work is boring... If only you had a computer, you could hack stuff and get rich...";
-
-  const hint2: string =
-    "Nice! Time to buy some hacking targets on the dark web...";
+  const hint2: string = "Buy some hacking targets.";
 
   return (
     <>

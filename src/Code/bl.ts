@@ -1,6 +1,7 @@
 import { HtmlHTMLAttributes } from "react";
 import FloatingText from "./FloatingText";
 import ForceUpdate from "./ForceUpdate";
+import GameData from "./GameData";
 import GameState from "./GameState";
 
 class bl {
@@ -14,12 +15,14 @@ class bl {
     private timer: NodeJS.Timer | undefined
     private tickCount: number = 0
     private floatingText: FloatingText
+    private moneyDisplayValue: number = 0 
 
     public stop() {
         console.log('stopping game...')
         clearInterval(this.timer)
     }
 
+    // Income: random chances at ticks. If multiple success per tick show '+10 X 3'
     constructor() {
         console.log('starting game...')
         this.moneyLabel = document.getElementById('moneyLabel') as HTMLElement
@@ -31,16 +34,29 @@ class bl {
     }
 
     private updateMoneyLabels() {
-        const displayMoney = GameState.current.money.toFixed(2)
+        const diff = GameState.current.money - this.moneyDisplayValue
+        // step is x% of missing value, but clamped at a minimum % of total value
+        const change = Math.sign(diff) * Math.max(Math.abs(diff * 0.47), 10)
+        this.moneyDisplayValue += change
+        if (change > 0 && this.moneyDisplayValue > GameState.current.money)
+            this.moneyDisplayValue = GameState.current.money
+        
+        const displayMoney = Math.round(this.moneyDisplayValue)
         const displayIncome = GameState.current.income.toFixed(2)
         
         this.moneyLabel!.innerText = `$${displayMoney}`
-        this.incomeLabel!.innerText = `per second: $${displayIncome}`
     }
 
     public updateCpuUI() {
         ForceUpdate.updateBuyCpuButtons()
         ForceUpdate.updateCpuList()
+    }
+
+    private checkEnableCpus() {
+        if (!GameState.current.showCpuPane && GameState.current.money >= GameData.showFirstCpusAt) {
+            GameState.current.showCpuPane = true
+            ForceUpdate.updateApp()
+        }
     }
 
     private nextUiPriceCheck: number = 0
@@ -51,16 +67,14 @@ class bl {
 
         GameState.current.money = GameState.current.money + GameState.current.income * bl.perSecMul
         this.updateMoneyLabels()
-    
+
+        this.checkEnableCpus()
+        
         const now = Date.now()
-        if (now > this.nextUiPriceCheck) {
+        if (now > this.nextUiPriceCheck && ForceUpdate.updateBuyCpuButtons) {
             ForceUpdate.updateBuyCpuButtons()
             this.nextUiPriceCheck = now + 500
         }
-    }
-
-    private calcIncome(): number {
-        return 0.0
     }
 
     public static onManualWorkDone(event: React.MouseEvent) {

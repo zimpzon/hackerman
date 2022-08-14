@@ -13,7 +13,20 @@ function CpuListHax() {
   for (let i = 0; i < GameState.current.cpuCount; ++i)
     myCpus.push(<Cpu mhz={GameState.current.cpuMzh} key={i} />);
 
-  return <><div id="cpuList">{myCpus}</div></>;
+  const reputation =
+    GameState.current.cpuCount === 0 ? "None" : "Nobody has heard of you. Yet.";
+
+  return (
+    <>
+      <div className="infoText">
+        <div>
+          Power: {GameState.current.cpuCount * GameState.current.cpuMzh} Mhz
+        </div>
+        <div>Reputation: {reputation}</div>
+      </div>
+      <div id="cpuList">{myCpus}</div>
+    </>
+  );
 }
 
 export default CpuListHax;
