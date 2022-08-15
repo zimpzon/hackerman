@@ -14,7 +14,6 @@ class bl {
     private timer: NodeJS.Timer | undefined
     private tickCount: number = 0
     private floatingText: FloatingText
-    private moneyDisplayValue: number = 0 
 
     public stop() {
         console.log('stopping game...')
@@ -32,39 +31,14 @@ class bl {
         GameState.load()
     }
 
-    prevMoney: number = -1
+    prevMoney: number = -1;
 
     private updateMoneyLabels() {
         if (GameState.current.money === this.prevMoney)
             return;
-        this.prevMoney = GameState.current.money;
 
-        const diff = GameState.current.money - this.moneyDisplayValue
-       
-        // step is x% of missing value, but clamped at a minimum % of total value
-        const change = Math.sign(diff) * Math.max(Math.abs(diff * 0.47), 10)
-        this.moneyDisplayValue += change
-        if (change > 0 && this.moneyDisplayValue > GameState.current.money)
-            this.moneyDisplayValue = GameState.current.money
-        
-        const displayMoney = Math.round(this.moneyDisplayValue)
-        const displayIncome = GameState.current.income.toFixed(2)
-        
-        this.moneyLabel!.innerText = `$${displayMoney}`
-
-        const animColor: Keyframe[] = [
-            { color: 'black',  },
-            { color: 'grey' },
-            { color: 'black' },
-          ];
-          
-          const animTiming: KeyframeAnimationOptions = {
-            duration: 500,
-            iterations: 1,
-            easing: 'ease-out'
-          }
-        
-        this.moneyLabel!.animate(animColor, animTiming)
+        this.prevMoney = GameState.current.money
+        this.moneyLabel!.innerText = `$${GameState.current.money}`
     }
 
     public updateCpuUI() {
@@ -100,9 +74,7 @@ class bl {
     public static onManualWorkDone(event: React.MouseEvent) {
         GameState.current.money += GameState.current.manualWorkValue
         bl.instance.updateMoneyLabels()
-        const rndX = Math.random() * 15
-        const rndY = Math.random() * 5
-        bl.instance.floatingText.add(`$${GameState.current.manualWorkValue.toString()}`, event.clientX + rndX, event.clientY + rndY)
+        bl.instance.floatingText.add(`$${GameState.current.manualWorkValue.toString()}`, event.clientX, event.clientY)
     }
 }
 

@@ -22,13 +22,13 @@
 	font-size: clamp(10px, 1vw, 1vw);
 	width: clamp(60px, 5vw, 5vw);
 	height: clamp(60px, 5vw, 5vw);
-	background-color: lightgray;
-	border: 2px solid white;
+	background-color: black;
+	border: 1px solid white;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-image: url("../assets/cpu.jpg");
+	/* background-image: url("../assets/cpu.jpg");
 	background-size: cover;
-	background-position: center;
+	background-position: center; */
 }

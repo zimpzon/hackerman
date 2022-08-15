@@ -42,7 +42,7 @@ export function App() {
         <hr className="horzDivider" />
       </div>
       <div className="column col3">
-        <TargetList />
+        {/* <TargetList /> */}
       </div>
     </div>
   );

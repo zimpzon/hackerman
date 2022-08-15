@@ -14,7 +14,7 @@ function CpuListHax() {
     myCpus.push(<Cpu mhz={GameState.current.cpuMzh} key={i} />);
 
   const reputation =
-    GameState.current.cpuCount === 0 ? "None" : "Nobody has heard of you. Yet.";
+    GameState.current.cpuCount === 0 ? "None" : "Still none";
 
   return (
     <>
