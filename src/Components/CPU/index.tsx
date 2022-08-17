@@ -6,8 +6,7 @@ function Cpu({ mhz }: CpuProps) {
   return (
     <>
       <div className="cpu">
-        <div>{mhz}</div>
-        <div>Mhz</div>
+        <div>{mhz / 1000} Ghz</div>
       </div>
     </>
   );

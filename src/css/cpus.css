@@ -16,10 +16,9 @@
 .cpu {
 	border-radius: 5px;
 	margin: 10px;
-	color: white;
-	text-shadow: white 0px 0px 5px;
+	color: var(--col-common-text);
 	font-weight: bold;
-	font-size: clamp(10px, 1vw, 1vw);
+	font-size: clamp(0.5em, 1em, 1em);
 	width: clamp(60px, 5vw, 5vw);
 	height: clamp(60px, 5vw, 5vw);
 	background-color: black;
@@ -28,7 +27,4 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* background-image: url("../assets/cpu.jpg");
-	background-size: cover;
-	background-position: center; */
 }

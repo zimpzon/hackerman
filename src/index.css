@@ -1,5 +1,53 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
+:root {
+    --col-common-text:rgb(183, 183, 183);
+    --col-uncommon-text:rgb(30, 225, 50);
+    --col-rare-text:rgb(151, 166, 255);
+    --col-epic-text:rgb(219, 161, 255);
+    --col-legendary-text:rgb(255, 187, 0);
+}
+
+hr {
+	border: none;
+	height: 1px;
+	background-color: white;
+}
+
+button {
+	color: rgb(229, 229, 229);
+	background-color: rgb(50, 50, 50);
+}
+
+.upgradeCpuButton {
+	margin: 5px;
+}
+
+.textRarity {
+	font-style: bold;
+	text-shadow: black 0px 0px 2px;
+}
+
+.textRarityCommon {
+	color: var(--col-common-text);
+}
+
+.textRarityUncommon {
+	color: var(--col-uncommon-text);
+}
+
+.textRarityRare {
+	color: var(--col-rare-text);
+}
+
+.textRarityEpic {
+	color: var(--col-epic-text);
+}
+
+.textRarityLegendary {
+	color: var(--col-legendary-text);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
