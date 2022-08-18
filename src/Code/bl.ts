@@ -9,7 +9,7 @@ class bl {
     public static readonly tickMs: number = 100.0
     public static readonly perSecMul: number = 1.0 / (1000 / bl.tickMs)
 
-    private moneyLabel: HTMLElement | undefined
+    private moneyText: HTMLElement | undefined
     private incomeLabel: HTMLElement | undefined
     private timer: NodeJS.Timer | undefined
     private tickCount: number = 0
@@ -23,7 +23,7 @@ class bl {
     // Income: random chances at ticks. If multiple success per tick show '+10 X 3'
     constructor() {
         console.log('starting game...')
-        this.moneyLabel = document.getElementById('moneyLabel') as HTMLElement
+        this.moneyText = document.getElementById('moneyText') as HTMLElement
         this.incomeLabel = document.getElementById('incomeLabel') as HTMLElement
         this.floatingText = new FloatingText()
         this.timer = setInterval(() => {this.tick() }, bl.tickMs);
@@ -38,7 +38,7 @@ class bl {
             return;
 
         this.prevMoney = GameState.current.money
-        this.moneyLabel!.innerText = `$${GameState.current.money}`
+        this.moneyText!.innerText = `$${GameState.current.money}`
     }
 
     public updateCpuUI() {

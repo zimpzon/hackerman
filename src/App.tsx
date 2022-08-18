@@ -1,14 +1,8 @@
-import "./App.css";
-import MoneyOverview from "./Components/MoneyOverview";
-import ManualWorkButton from "./Components/ManualWorkButton";
-import HintText from "./Components/HintText";
-import BuyCpuButtonsHax from "./Components/BuyCpuButtonsHax";
-import CpuListHax from "./Components/CpuListHax";
+import ManualWorkButton from "./Components/Work/ManualWorkButton";
 import bl from "./Code/bl";
 import { useEffect, useState } from "react";
 import GameState from "./Code/GameState";
 import ForceUpdate from "./Code/ForceUpdate";
-import TargetList from "./Components/TargetList";
 
 export function App() {
   useEffect(() => {
@@ -24,26 +18,29 @@ export function App() {
   console.log("render app");
 
   return (
-    <div className="columns">
-      <div className="column col1">
-        {GameState.current.showCpuPane && (
-          <>
-            <BuyCpuButtonsHax />
-            <CpuListHax />
-          </>
-        )}
+    <div className="mainLayoutGrid">
+      <div className="moneyDiv level1Area">
+        <div id="moneyText">$0</div>
       </div>
-      <div className="column col2">
-        <MoneyOverview />
-        <hr className="horzDivider" />
-        <HintText />
-        <hr className="horzDivider" />
-        <ManualWorkButton onClick={bl.onManualWorkDone} />
-        <hr className="horzDivider" />
+      <div className="nftInfoDiv level1Area"></div>
+      <div className="cpuAreaDiv level1Area">
+        <div className="manualButtonDiv">
+          <ManualWorkButton onClick={bl.onManualWorkDone} />
+        </div>
+        <div className="cpuGfxDiv">
+          <div className="">CPU here</div>
+        </div>
+        <div className="cpuStatsDiv">
+          <div className="">CPU stats here</div>
+        </div>
+        <div className="cpuProgressBarDiv">
+          <div className="">CPU progress bar here</div>
+        </div>
+        <div className="cpuUpgradesDiv">
+          <div className="">CPU upgrades here</div>
+        </div>
       </div>
-      <div className="column col3">
-        {/* <TargetList /> */}
-      </div>
+      <div className="nftAreaDiv level1Area"></div>
     </div>
   );
 }
