@@ -3,6 +3,7 @@ import bl from "./Code/bl";
 import { useEffect, useState } from "react";
 import GameState from "./Code/GameState";
 import ForceUpdate from "./Code/ForceUpdate";
+import CpuUpgradeList from "./Components/CpuUpgradeList";
 
 export function App() {
   useEffect(() => {
@@ -28,15 +29,27 @@ export function App() {
           <ManualWorkButton onClick={bl.onManualWorkDone} />
         </div>
         <div className="cpuGfxDiv">
+          <hr />
           <div className="">CPU here</div>
-        </div>
-        <div className="cpuStatsDiv">
-          <div className="">CPU stats here</div>
+          (700 Mhz) (usage: 80%)
         </div>
         <div className="cpuProgressBarDiv">
-          <div className="">CPU progress bar here</div>
+          <hr />
+          <div className="">
+            CPU progress bar here
+            <div className="cpuProgressWrapper">
+              <div className="cpuProgress">
+                <span
+                  className="cpuProgressFill"
+                  style={{ width: "70%" }}
+                ></span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="cpuUpgradesDiv">
+          <hr />
+          <CpuUpgradeList></CpuUpgradeList>
           <div className="">CPU upgrades here</div>
         </div>
       </div>

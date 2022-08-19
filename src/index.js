@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './css/layout.css'
 import './css/manualWork.css'
+import './css/effects.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

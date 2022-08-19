@@ -1,6 +1,7 @@
 import bl from "./bl"
+import ForceUpdate from "./ForceUpdate"
 import GameData from "./GameData"
-import GameState from "./GameState"
+import GameState, { knownCpuUpgrade } from "./GameState"
 
 class Shop {
     static assertCanAfford(price: number, what: string) {
@@ -8,27 +9,37 @@ class Shop {
             throw new Error(`cannot afford ${what}, price: ${price}, has: ${GameState.current.money} `)
     }
     
-    public static cpuPrice() {
-        return Math.round(GameData.cpuBasePrice * Math.pow(GameData.cpuPriceExp, GameState.current.cpuCount))
+    public static cpuPrice(basePrice: number, ownedCount: number) {
+        return Math.round(basePrice * Math.pow(GameData.cpuPriceExp, ownedCount))
     }
 
-    public static schoolBulliesPrice() {
-        return Math.round(GameData.targetOneBasePrice * Math.pow(GameData.targetOnePriceExp, GameState.current.targetOneCount))
+    public static updateCpuStates() {
+        let hasChange: boolean = false;
+        for (const upgDef of GameData.possibleCpuUpgrades) {
+            const userUpg = GameState.current.cpuUpgrades.get(upgDef.id);
+            if (!userUpg) {
+                // User has not seen upgrade, check if he should now.
+                if (GameState.current.money >= upgDef.showDarkAt) {
+                    hasChange = true
+                    GameState.current.cpuUpgrades.set(upgDef.id,  {
+                        darkShown: true,
+                    } as knownCpuUpgrade)
+                }
+            }
+        }
+
+        if (hasChange) {
+            ForceUpdate.updateBuyCpuButtons()
+        }
     }
 
     public static buyCpu() {
-        const price = Shop.cpuPrice()
+        const price = 1
         Shop.assertCanAfford(price, 'cpu')
 
         GameState.current.money -= price
-        GameState.current.cpuCount++
 
-        bl.instance.updateCpuUI()
-    }
-
-    public static canAffordCpu() {
-        const price = Shop.cpuPrice()
-        return price <= GameState.current.money
+        ForceUpdate.updateBuyCpuButtons()
     }
 }
 

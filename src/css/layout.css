@@ -1,5 +1,6 @@
 body {
 	margin: 20px;
+	box-sizing: border-box;
 }
 
 .mainLayoutGrid {
@@ -32,9 +33,6 @@ body {
 }
 
 .cpuGfxDiv {
-}
-
-.cpuStatsDiv {
 }
 
 .cpuProgressBarDiv {

@@ -1,0 +1,18 @@
+.btn {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 6px 0;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+    background-color: #fff;
+    background-repeat: repeat-x;
+    background-position: left top;
+    font-size: 14px;
+    text-shadow: 1px 1px 1px #fff;
+    font-weight: bold;
+    height: 22px;
+    line-height: 1.5em;
+}

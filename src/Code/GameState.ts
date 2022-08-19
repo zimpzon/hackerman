@@ -4,27 +4,24 @@ type gameStateType = {
     money: number
     income: number
     manualWorkValue: number
-    showCpuPane: boolean
-    showTargetsPane: boolean
-    showRobotsPane: boolean
-    cpuCount: number
-    targetOneCount: number
-    cpuMzh: number
+    cpuUpgrades: Map<number, knownCpuUpgrade>
+}
+
+export type knownCpuUpgrade = {
+    id: number
+    count: number
+    darkShown: boolean
+    fullyShown: boolean
 }
 
 class GameState {
-    private static storageKey: string = 'hack3rman-gameState'
+    private static storageKey: string = 'save-game'
 
     public static current: gameStateType = {
         money: 0,
         income: 0,
         manualWorkValue: GameData.manualWorkBasePrice,
-        showCpuPane: false,
-        showTargetsPane: false,
-        showRobotsPane: false,
-        cpuCount: 0,
-        cpuMzh: GameData.cpuBaseMhz,
-        targetOneCount: 1,
+        cpuUpgrades: new Map<number, knownCpuUpgrade>(),
     }
 
     public static load() {

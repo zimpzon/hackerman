@@ -5,24 +5,11 @@ class ForceUpdate {
     }
 
     public static updateBuyCpuButtons() {
-        if (this.setBuyCpuButtonsTick)
-            this.setBuyCpuButtonsTick(Date.now())
+        if (this.setCpuUpgradesTick)
+            this.setCpuUpgradesTick(Date.now())
     }
-
-    public static updateCpuList() {
-        if (this.setShowCpuListTick)
-            this.setShowCpuListTick(Date.now())
-    }
-
-    public static updateTargetList() {
-        if (this.setShowTargetListTick)
-            this.setShowTargetListTick(Date.now())
-    }
-
     public static setAppTick : any
-    public static setBuyCpuButtonsTick : any
-    public static setShowCpuListTick : any
-    public static setShowTargetListTick : any
+    public static setCpuUpgradesTick : any
 }
 
 export default ForceUpdate
