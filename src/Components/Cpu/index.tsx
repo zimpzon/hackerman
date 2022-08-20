@@ -4,13 +4,28 @@ import "./index.css";
 function Cpu(): JSX.Element {
   return (
     <>
-      <div>Your super computer</div>
-      <div>CPUs: {GameState.cpuCount}</div>
-      <div>Total power: {GameState.totalMhz} Mhz</div>
-      <div>Income per second: ${GameState.incomePerSec.toFixed(1)}</div>
-      <div>Hacking progress: {GameState.current.cpuProgress.toFixed(1)}%</div>
+      <div className="wrapper">
+        <div>Your super computer</div>
+        <div>{GameState.totalMhz} Mhz</div>
+        <div>Cores: {GameState.cpuCount}</div>
+        <div>Income per second: ${GameState.incomePerSec.toFixed(1)}</div>
+        <div>
+          Hacking progress: {GameState.current.cpuProgress.toFixed(1)}% (chance
+          of success: 0%)
+        </div>
+      </div>
     </>
   );
+}
+{
+  /* <div className="cpuProgressWrapper">
+<div className="cpuProgress">
+  <span
+    className="cpuProgressFill"
+    style={{ width: "70%" }}
+  ></span>
+</div>
+</div> */
 }
 
 export default Cpu;

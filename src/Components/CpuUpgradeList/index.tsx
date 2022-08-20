@@ -11,12 +11,15 @@ function CpuUpgradeList(): JSX.Element {
   const buttons = [];
   for (const upgDef of GameData.possibleCpuUpgrades) {
     const ownedCount = GameState.current.cpuUpgradeCounts.get(upgDef.id) ?? 0;
-    const showDark = GameState.current.maxMoney >= upgDef.showDarkAt;
-    const showFully = GameState.current.maxMoney >= upgDef.fullyShowAt;
+    const showDark =
+      GameState.current.maxMoney >= upgDef.basePrice * 0.5 || upgDef.id <= 2;
+    const showFully = GameState.current.maxMoney >= upgDef.basePrice;
     if (!showDark && !showFully) continue;
     const price = Shop.cpuPrice(upgDef.basePrice, ownedCount);
     const canAfford = GameState.current.money >= price;
     const priceClass = canAfford ? "canAfford" : "cannotAfford";
+    const name = showFully ? upgDef.name : "???";
+    const displayMhz = showFully ? upgDef.mhz : "?";
 
     const btn = (
       <>
@@ -26,9 +29,9 @@ function CpuUpgradeList(): JSX.Element {
           onClick={canAfford ? () => onBuyClick(upgDef) : undefined}
         >
           <div>
-            {upgDef.name} ({ownedCount})
+            {name} ({ownedCount})
           </div>
-          <div>{upgDef.mhz} Mhz</div>
+          <div>{displayMhz} Mhz</div>
           <div className={priceClass}>${price}</div>
         </a>
       </>

@@ -40,20 +40,6 @@ export function App() {
           <hr />
           <Cpu />
         </div>
-        <div className="cpuProgressBarDiv">
-          <hr />
-          <div className="">
-            CPU progress bar here
-            <div className="cpuProgressWrapper">
-              <div className="cpuProgress">
-                <span
-                  className="cpuProgressFill"
-                  style={{ width: "70%" }}
-                ></span>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="cpuUpgradesDiv">
           <hr />
           <CpuUpgradeList></CpuUpgradeList>
