@@ -9,7 +9,7 @@ type gameStateType = {
 
 export type knownCpuUpgrade = {
     id: number
-    count: number
+    ownedCount: number
     darkShown: boolean
     fullyShown: boolean
 }

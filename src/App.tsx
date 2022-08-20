@@ -50,7 +50,6 @@ export function App() {
         <div className="cpuUpgradesDiv">
           <hr />
           <CpuUpgradeList></CpuUpgradeList>
-          <div className="">CPU upgrades here</div>
         </div>
       </div>
       <div className="nftAreaDiv level1Area"></div>
