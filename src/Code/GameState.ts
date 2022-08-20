@@ -2,16 +2,10 @@ import GameData from "./GameData"
 
 type gameStateType = {
     money: number
-    income: number
+    maxMoney: number
     manualWorkValue: number
-    cpuUpgrades: Map<number, knownCpuUpgrade>
-}
-
-export type knownCpuUpgrade = {
-    id: number
-    ownedCount: number
-    darkShown: boolean
-    fullyShown: boolean
+    cpuUpgradeCounts: Map<number, number>
+    cpuProgress: number
 }
 
 class GameState {
@@ -19,11 +13,16 @@ class GameState {
 
     public static current: gameStateType = {
         money: 0,
-        income: 0,
+        maxMoney: 0,
         manualWorkValue: GameData.manualWorkBasePrice,
-        cpuUpgrades: new Map<number, knownCpuUpgrade>(),
+        cpuUpgradeCounts: new Map<number, number>(),
+        cpuProgress: 0,
     }
 
+    public static cpuCount: number = 0
+    public static totalMhz: number = 0
+    public static incomePerSec: number = 0
+    
     public static load() {
         const json = localStorage.getItem(GameState.storageKey)
         if (!json)

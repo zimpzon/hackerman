@@ -1,6 +1,6 @@
 import FloatingText from "./FloatingText";
+import GameData from "./GameData";
 import GameState from "./GameState";
-import Shop from "./Shop";
 
 class bl {
     public static instance: bl
@@ -9,25 +9,17 @@ class bl {
     public static readonly perSecMul: number = 1.0 / (1000 / bl.tickMs)
 
     private moneyText: HTMLElement | undefined
-    private timer: NodeJS.Timer | undefined
     private tickCount: number = 0
     private floatingText: FloatingText
 
-    public stop() {
-        console.log('stopping game...')
-        clearInterval(this.timer)
-    }
-
-    // Income: random chances at ticks. If multiple success per tick show '+10 X 3'
     constructor() {
         console.log('starting game...')
         this.moneyText = document.getElementById('moneyText') as HTMLElement
         this.floatingText = new FloatingText()
-        this.timer = setInterval(() => {this.tick() }, bl.tickMs);
 
         GameState.load()
-
-        this.tick()
+         
+        this.updateMoneyLabels()
     }
 
     prevMoney: number = -1;
@@ -37,16 +29,36 @@ class bl {
             return;
 
         this.prevMoney = GameState.current.money
-        this.moneyText!.innerText = `$${GameState.current.money}`
+        this.moneyText!.innerText = `$${GameState.current.money.toFixed(0)}`
     }
 
-    private tick() {
+    public updateCounts() {
+        GameState.cpuCount = 0
+        GameState.totalMhz = 0
+
+        GameState.current.cpuUpgradeCounts.forEach((value: number, key: number) => {
+            GameState.cpuCount += value;
+            const upg = GameData.possibleCpuUpgrades[key - 1];
+            GameState.totalMhz += upg.mhz * value;
+        })
+
+        GameState.incomePerSec = GameState.totalMhz * 0.1
+    }
+
+    public tick() {
         this.tickCount++
+        this.updateCounts();
         this.floatingText.removeExpired()
 
-        GameState.current.money = GameState.current.money + GameState.current.income * bl.perSecMul
+        GameState.current.money += GameState.incomePerSec *  bl.perSecMul;
+        GameState.current.maxMoney = Math.max(GameState.current.maxMoney, GameState.current.money);
+
+        GameState.current.cpuProgress += GameState.totalMhz * 0.01 * bl.perSecMul;
+        if (GameState.current.cpuProgress >= 100) {
+            GameState.current.cpuProgress = 0
+        }
+
         this.updateMoneyLabels()
-        Shop.updateCpuStates()
     }
 
     public static onManualWorkDone(event: React.MouseEvent) {

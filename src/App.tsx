@@ -1,22 +1,30 @@
 import ManualWorkButton from "./Components/Work/ManualWorkButton";
 import bl from "./Code/bl";
-import { useEffect, useState } from "react";
-import GameState from "./Code/GameState";
-import ForceUpdate from "./Code/ForceUpdate";
+import { useEffect, useRef } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
+import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
+import Cpu from "./Components/Cpu";
 
 export function App() {
+  const tick = useRef<NodeJS.Timer>();
+  const { upgradeCpuButtonsTick, setUpgradeCpuButtonsTick } =
+    useUpgradeCpuButtonsTick();
+
+  const tickCount = useRef(0);
+
   useEffect(() => {
+    tick.current = setInterval(() => {
+      tickCount.current += 1;
+      bl.instance.tick();
+      setUpgradeCpuButtonsTick(tickCount.current); // out of date, just triggers render all
+    }, bl.tickMs);
+
     bl.instance = new bl();
+
     return () => {
-      bl.instance.stop();
+      clearInterval(tick.current);
     };
   }, []);
-
-  const [_, setForceUpdate] = useState(0);
-  ForceUpdate.setAppTick = setForceUpdate;
-
-  console.log("render app");
 
   return (
     <div className="mainLayoutGrid">
@@ -30,8 +38,7 @@ export function App() {
         </div>
         <div className="cpuGfxDiv">
           <hr />
-          <div className="">CPU here</div>
-          (700 Mhz) (usage: 80%)
+          <Cpu />
         </div>
         <div className="cpuProgressBarDiv">
           <hr />

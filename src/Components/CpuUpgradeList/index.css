@@ -15,3 +15,10 @@
     text-shadow: 1px 1px 1px #fff;
     font-weight: bold;
 }
+
+.canAfford {
+    color:rgb(78, 145, 12);
+}
+.cannotAfford {
+    color:rgb(241, 30, 40);
+}

@@ -1,7 +1,6 @@
-import bl from "./bl"
-import ForceUpdate from "./ForceUpdate"
-import GameData from "./GameData"
-import GameState, { knownCpuUpgrade } from "./GameState"
+import bl from "./bl";
+import GameData, { cpuUpgradeDefinition } from "./GameData"
+import GameState from "./GameState"
 
 class Shop {
     static assertCanAfford(price: number, what: string) {
@@ -13,33 +12,15 @@ class Shop {
         return Math.round(basePrice * Math.pow(GameData.cpuPriceExp, ownedCount))
     }
 
-    public static updateCpuStates() {
-        let hasChange: boolean = false;
-        for (const upgDef of GameData.possibleCpuUpgrades) {
-            const userUpg = GameState.current.cpuUpgrades.get(upgDef.id);
-            if (!userUpg) {
-                // User has not seen upgrade, check if he should now.
-                if (GameState.current.money >= upgDef.showDarkAt) {
-                    hasChange = true
-                    GameState.current.cpuUpgrades.set(upgDef.id,  {
-                        darkShown: true,
-                    } as knownCpuUpgrade)
-                }
-            }
-        }
-
-        if (hasChange) {
-            ForceUpdate.updateBuyCpuButtons()
-        }
-    }
-
-    public static buyCpu() {
-        const price = 1
-        Shop.assertCanAfford(price, 'cpu')
-
+    public static buyCpu(item: cpuUpgradeDefinition) {
+        const ownedCount = GameState.current.cpuUpgradeCounts.get(item.id) ?? 0;
+        const price = this.cpuPrice(item.basePrice, ownedCount)
+        Shop.assertCanAfford(price, item.name)
+        
+        GameState.current.cpuUpgradeCounts.set(item.id, ownedCount + 1)
         GameState.current.money -= price
-
-        ForceUpdate.updateBuyCpuButtons()
+        
+        bl.instance.updateCounts()
     }
 }
 
