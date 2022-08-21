@@ -47,10 +47,19 @@ export function App() {
         </div>
       </div>
       <div className="nftAreaDiv level1Area">
-        <img
-          src={images.get("9")}
-          style={{ width: "256px", height: "256px" }}
-        />
+        <>
+          {Array.from(images).map(([k, v]) => (
+            <img
+              src={images.get(k)}
+              style={{
+                width: "128px",
+                height: "128px",
+                margin: "3px",
+                border: "2px outset white",
+              }}
+            />
+          ))}
+        </>
       </div>
     </div>
   );
