@@ -17,6 +17,7 @@ function Cpu(): JSX.Element {
     </>
   );
 }
+
 {
   /* <div className="cpuProgressWrapper">
 <div className="cpuProgress">

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import Cpu from "./Components/Cpu";
+import images from "./assets";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -26,6 +27,8 @@ export function App() {
     };
   }, []);
 
+  console.log(images)
+  
   return (
     <div className="mainLayoutGrid">
       <div className="moneyDiv level1Area">
@@ -45,7 +48,9 @@ export function App() {
           <CpuUpgradeList></CpuUpgradeList>
         </div>
       </div>
-      <div className="nftAreaDiv level1Area"></div>
+      <div className="nftAreaDiv level1Area">
+        {/* <img src={a9} style={{width: "512px", height: "512px"}}></img> */}
+      </div>
     </div>
   );
 }
