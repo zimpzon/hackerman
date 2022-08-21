@@ -27,8 +27,6 @@ export function App() {
     };
   }, []);
 
-  console.log(images)
-  
   return (
     <div className="mainLayoutGrid">
       <div className="moneyDiv level1Area">
@@ -49,7 +47,10 @@ export function App() {
         </div>
       </div>
       <div className="nftAreaDiv level1Area">
-        {/* <img src={a9} style={{width: "512px", height: "512px"}}></img> */}
+        <img
+          src={images.get("9")}
+          style={{ width: "256px", height: "256px" }}
+        />
       </div>
     </div>
   );
