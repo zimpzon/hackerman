@@ -10,8 +10,7 @@ function Cpu(): JSX.Element {
         <div>Cores: {GameState.cpuCount}</div>
         <div>Income per second: ${GameState.incomePerSec.toFixed(1)}</div>
         <div>
-          Hacking progress: {GameState.current.cpuProgress.toFixed(1)}% (chance
-          of success: 0%)
+          Image building progress: {GameState.current.cpuProgress.toFixed(1)}%
         </div>
       </div>
     </>

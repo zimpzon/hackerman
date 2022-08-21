@@ -1,6 +1,7 @@
 body {
 	margin: 20px;
 	box-sizing: border-box;
+	background-color: rgb(80, 80, 80);
 }
 
 .mainLayoutGrid {
@@ -12,7 +13,7 @@ body {
 }
 
 .level1Area {
-	background-color: aquamarine;
+	background-color: grey;
 }
 
 .cpuAreaDiv {
@@ -20,24 +21,6 @@ body {
 	flex-direction: column;
 }
 
-.moneyDiv {
-}
-
-.nftInfoDiv {
-}
-
 .nftAreaDiv {
-	/* background-image: url('./9.png'); */
-}
-
-.manualButtonDiv {
-}
-
-.cpuGfxDiv {
-}
-
-.cpuProgressBarDiv {
-}
-
-.cpuUpgradesDiv {
+	background-color: rgb(80, 80, 80);
 }

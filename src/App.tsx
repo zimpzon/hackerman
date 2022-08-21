@@ -47,19 +47,47 @@ export function App() {
         </div>
       </div>
       <div className="nftAreaDiv level1Area">
-        <>
-          {Array.from(images).map(([k, v]) => (
-            <img
-              src={images.get(k)}
-              style={{
-                width: "128px",
-                height: "128px",
-                margin: "3px",
-                border: "2px outset white",
-              }}
-            />
-          ))}
-        </>
+        <div className="level1Area">
+          <h3>Candidates / Building</h3>
+          <>
+            {Array.from(images)
+              .slice(0, 5)
+              .map(([k, v]) => (
+                <>
+                  <img
+                    alt="abc"
+                    src={images.get(k)}
+                    style={{
+                      filter: "grayscale(1) contrast(0.5)",
+                      width: "128px",
+                      height: "128px",
+                      margin: "3px",
+                      border: "3px outset grey",
+                    }}
+                  />
+                </>
+              ))}
+          </>
+        </div>
+        <div className="level1Area">
+          <h3>Your collection</h3>
+          <>
+            {Array.from(images).map(([k, v]) => (
+              <>
+                <img
+                  alt="abc"
+                  src={images.get(k)}
+                  style={{
+                    width: "128px",
+                    height: "128px",
+                    margin: "3px",
+                    border: "3px outset grey",
+                  }}
+                />
+              </>
+            ))}
+          </>
+        </div>
       </div>
     </div>
   );
