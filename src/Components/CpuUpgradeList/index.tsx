@@ -8,6 +8,7 @@ function CpuUpgradeList(): JSX.Element {
     Shop.buyCpu(item);
   };
 
+  // TODO: make sure there is always a dark one to go for.
   const buttons = [];
   for (const upgDef of GameData.possibleCpuUpgrades) {
     const ownedCount = GameState.current.cpuUpgradeCounts.get(upgDef.id) ?? 0;
