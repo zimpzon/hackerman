@@ -49,6 +49,7 @@ class GameState {
 
     public static reset() {
         localStorage.removeItem(GameState.storageKey)
+        this.load()
     }
 }
 

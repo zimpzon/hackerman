@@ -36,9 +36,9 @@ class bl {
         GameState.totalMhz = 0
 
         for (let i = 0; i < GameState.current.cpuUpgradeCounts.length; ++i) {
-            if (!GameState.current.cpuUpgradeCounts)
+            if (!GameState.current.cpuUpgradeCounts[i])
                 continue;
-
+                
             const count: number = GameState.current.cpuUpgradeCounts[i]
             GameState.cpuCount += count;
             const upg = GameData.possibleCpuUpgrades[i];
