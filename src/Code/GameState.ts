@@ -4,7 +4,7 @@ type gameStateType = {
     money: number
     maxMoney: number
     manualWorkValue: number
-    cpuUpgradeCounts: Map<number, number>
+    cpuUpgradeCounts: number[]
     cpuProgress: number
 }
 
@@ -15,7 +15,7 @@ class GameState {
         money: 0,
         maxMoney: 0,
         manualWorkValue: GameData.manualWorkBasePrice,
-        cpuUpgradeCounts: new Map<number, number>(),
+        cpuUpgradeCounts: [],
         cpuProgress: 0,
     }
 
@@ -25,15 +25,30 @@ class GameState {
     
     public static load() {
         const json = localStorage.getItem(GameState.storageKey)
-        if (!json)
+        if (!json) {
+            this.current = {
+                money: 0,
+                maxMoney: 0,
+                manualWorkValue: GameData.manualWorkBasePrice,
+                cpuUpgradeCounts: [],
+                cpuProgress: 0,
+            }
             return
+        }
 
         GameState.current = JSON.parse(json) as gameStateType
+
+        // Set lenght to dynamically adjust to more upgrades implemented.
+        GameState.current.cpuUpgradeCounts.length = GameData.possibleCpuUpgrades.length
     }
     
     public static save() {
         const json = JSON.stringify(GameState.current)
         localStorage.setItem(GameState.storageKey, json)
+    }
+
+    public static reset() {
+        localStorage.removeItem(GameState.storageKey)
     }
 }
 

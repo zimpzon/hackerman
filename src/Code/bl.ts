@@ -35,11 +35,15 @@ class bl {
         GameState.cpuCount = 0
         GameState.totalMhz = 0
 
-        GameState.current.cpuUpgradeCounts.forEach((value: number, key: number) => {
-            GameState.cpuCount += value;
-            const upg = GameData.possibleCpuUpgrades[key - 1];
-            GameState.totalMhz += upg.mhz * value;
-        })
+        for (let i = 0; i < GameState.current.cpuUpgradeCounts.length; ++i) {
+            if (!GameState.current.cpuUpgradeCounts)
+                continue;
+
+            const count: number = GameState.current.cpuUpgradeCounts[i]
+            GameState.cpuCount += count;
+            const upg = GameData.possibleCpuUpgrades[i];
+            GameState.totalMhz += upg.mhz * count;
+        }
 
         GameState.incomePerSec = GameState.totalMhz * 0.1
     }

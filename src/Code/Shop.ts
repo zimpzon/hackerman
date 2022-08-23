@@ -13,11 +13,11 @@ class Shop {
     }
 
     public static buyCpu(item: cpuUpgradeDefinition) {
-        const ownedCount = GameState.current.cpuUpgradeCounts.get(item.id) ?? 0;
+        const ownedCount = GameState.current.cpuUpgradeCounts[item.id -1] ?? 0;
         const price = this.cpuPrice(item.basePrice, ownedCount)
         Shop.assertCanAfford(price, item.name)
         
-        GameState.current.cpuUpgradeCounts.set(item.id, ownedCount + 1)
+        GameState.current.cpuUpgradeCounts[item.id - 1] = ownedCount + 1
         GameState.current.money -= price
         
         bl.instance.updateCounts()

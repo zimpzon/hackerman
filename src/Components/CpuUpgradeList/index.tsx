@@ -11,7 +11,7 @@ function CpuUpgradeList(): JSX.Element {
   // TODO: make sure there is always a dark one to go for.
   const buttons = [];
   for (const upgDef of GameData.possibleCpuUpgrades) {
-    const ownedCount = GameState.current.cpuUpgradeCounts.get(upgDef.id) ?? 0;
+    const ownedCount = GameState.current.cpuUpgradeCounts[upgDef.id - 1] ?? 0;
     const showDark =
       GameState.current.maxMoney >= upgDef.basePrice * 0.5 || upgDef.id <= 2;
     const showFully = GameState.current.maxMoney >= upgDef.basePrice;

@@ -5,6 +5,7 @@ import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import Cpu from "./Components/Cpu";
 import images from "./assets";
+import GameState from "./Code/GameState";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -30,6 +31,9 @@ export function App() {
   return (
     <div className="mainLayoutGrid">
       <div className="moneyDiv level1Area">
+        <button onClick={() => GameState.save()}>Save</button>
+        <button onClick={() => GameState.load()}>Load</button>
+        <button onClick={() => GameState.reset()}>Reset</button>
         <div id="moneyText">$0</div>
       </div>
       <div className="nftInfoDiv level1Area"></div>
