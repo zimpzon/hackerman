@@ -6,6 +6,9 @@ import './css/manualWork.css'
 import './css/effects.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ReactGA from "react-ga";
+
+ReactGA.initialize("G-EBPDGV4BCY");
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
