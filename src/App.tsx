@@ -1,14 +1,18 @@
+import * as PIXI from "pixi.js";
 import ManualWorkButton from "./Components/Work/ManualWorkButton";
 import bl from "./Code/bl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import Cpu from "./Components/Cpu";
 import images from "./assets";
 import GameState from "./Code/GameState";
+import { usePixi } from "./Code/pixiHook";
 
 export function App() {
+  const pixies = usePixi();
   const tick = useRef<NodeJS.Timer>();
+
   const { upgradeCpuButtonsTick, setUpgradeCpuButtonsTick } =
     useUpgradeCpuButtonsTick();
 
@@ -27,6 +31,17 @@ export function App() {
       clearInterval(tick.current);
     };
   }, []);
+
+  function setPixiImage(url: string) {
+    if (!pixies) throw Error("missing pixies");
+
+    PIXI.Texture.fromURL(url).then((tex) => {
+      pixies.imageEffectSprite.texture = tex;
+      pixies.app.renderer.render(pixies.app.stage);
+    });
+  }
+
+  if (pixies) setPixiImage(images.get("1"));
 
   return (
     <div className="mainLayoutGrid">
@@ -54,8 +69,13 @@ export function App() {
         <div className="level1Area">
           <h3>Candidates / Building</h3>
           <>
+            <canvas
+              style={{ width: "200px", height: "200px" }}
+              id="pixiCanvas"
+            />
+
             {Array.from(images)
-              .slice(0, 5)
+              .slice(0, 15)
               .map(([k, v]) => (
                 <>
                   <img
@@ -82,12 +102,15 @@ export function App() {
                   <img
                     alt="abc"
                     src={images.get(k)}
+                    onClick={() => {
+                      setPixiImage(v);
+                    }}
                     style={{
                       width: "128px",
                       height: "128px",
                       margin: "3px",
                       border: "3px outset grey",
-                      filter: "grayscale(0) contrast(0.01)",
+                      filter: "grayscale(0) contrast(0.2)",
                     }}
                   />
                 </>

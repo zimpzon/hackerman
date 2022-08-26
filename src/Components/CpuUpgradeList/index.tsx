@@ -25,19 +25,21 @@ function CpuUpgradeList(): JSX.Element {
 
     const btn = (
       <>
-        <a
-          className="btn"
-          key={upgDef.id}
-          onClick={canAfford ? () => onBuyClick(upgDef) : undefined}
-        >
-          <div>
-            {name} ({ownedCount})
-          </div>
-          <div>{displayMhz} Mhz</div>
-          <div className={priceClass}>
-            ${price} (${(incomePerDollar * 60).toFixed(5)}/min)
-          </div>
-        </a>
+        <span key={upgDef.id}>
+          <a
+            className="btn"
+            key={upgDef.id}
+            onClick={canAfford ? () => onBuyClick(upgDef) : undefined}
+          >
+            <div>
+              {name} ({ownedCount})
+            </div>
+            <div>{displayMhz} Mhz</div>
+            <div className={priceClass}>
+              ${price} (${(incomePerDollar * 60).toFixed(5)}/min)
+            </div>
+          </a>
+        </span>{" "}
       </>
     );
 

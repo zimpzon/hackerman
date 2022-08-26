@@ -1,6 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script id="imageEffectShader" type="shader">
+      precision highp float;
+      precision highp sampler2D;
+
+      uniform highp float progress;
+
+      varying vec2 vTextureCoord;
+      uniform sampler2D uTexture;
+
+      float rand(vec2 co){
+        return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+      }
+
+      float pingpong(float a, float b) {
+        if (b == 0.0) {
+          return 0.0;
+        } else {
+          return abs(fract((a - b) / (b * 2.0)) * b * 2.0 - b);
+        }
+      }
+
+      void main() {
+        float val = progress * (3.141592 * 2.0);
+        vec2 uv = vTextureCoord;
+        vec2 uv2 = uv;
+        uv2.x = 0.0;
+        float rnd = rand(uv2);
+        uv.x += rnd * progress;
+        uv.x = pingpong(uv.x, 1.0);
+        vec4 c = texture2D(uTexture, uv);
+        
+        gl_FragColor = c;
+      }
+    </script>
+
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
