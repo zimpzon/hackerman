@@ -21,6 +21,7 @@ function CpuUpgradeList(): JSX.Element {
     const priceClass = canAfford ? "canAfford" : "cannotAfford";
     const name = showFully ? upgDef.name : "???";
     const displayMhz = showFully ? upgDef.mhz : "?";
+    const incomePerDollar = (upgDef.mhz * 0.1) / price;
 
     const btn = (
       <>
@@ -33,7 +34,9 @@ function CpuUpgradeList(): JSX.Element {
             {name} ({ownedCount})
           </div>
           <div>{displayMhz} Mhz</div>
-          <div className={priceClass}>${price}</div>
+          <div className={priceClass}>
+            ${price} (${(incomePerDollar * 60).toFixed(5)}/min)
+          </div>
         </a>
       </>
     );
@@ -41,7 +44,11 @@ function CpuUpgradeList(): JSX.Element {
     buttons.push(btn);
   }
 
-  return <>{buttons}</>;
+  return (
+    <>
+      <div className="verticalScrollArea">{buttons}</div>
+    </>
+  );
 }
 
 export default CpuUpgradeList;

@@ -23,4 +23,14 @@ body {
 
 .nftAreaDiv {
 	background-color: rgb(80, 80, 80);
+	/* doesn't work, it should fill the remaining vertical screen space and use scrolling for overflow. */
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+	flex: 1 1 auto;
+}
+
+.verticalScrollArea {
+	overflow-y: scroll;
+	overflow-x: hidden;
 }

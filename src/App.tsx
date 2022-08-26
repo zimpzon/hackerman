@@ -62,7 +62,7 @@ export function App() {
                     alt="abc"
                     src={images.get(k)}
                     style={{
-                      filter: "grayscale(1) contrast(0.5)",
+                      filter: "grayscale(1) contrast(0.015)",
                       width: "128px",
                       height: "128px",
                       margin: "3px",
@@ -76,20 +76,23 @@ export function App() {
         <div className="level1Area">
           <h3>Your collection</h3>
           <>
-            {Array.from(images).map(([k, v]) => (
-              <>
-                <img
-                  alt="abc"
-                  src={images.get(k)}
-                  style={{
-                    width: "128px",
-                    height: "128px",
-                    margin: "3px",
-                    border: "3px outset grey",
-                  }}
-                />
-              </>
-            ))}
+            <div className="verticalScrollArea">
+              {Array.from(images).map(([k, v]) => (
+                <>
+                  <img
+                    alt="abc"
+                    src={images.get(k)}
+                    style={{
+                      width: "128px",
+                      height: "128px",
+                      margin: "3px",
+                      border: "3px outset grey",
+                      filter: "grayscale(0) contrast(0.01)",
+                    }}
+                  />
+                </>
+              ))}
+            </div>
           </>
         </div>
       </div>
