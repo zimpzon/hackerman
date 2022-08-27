@@ -1,9 +1,9 @@
 class GameData {
-    public static manualWorkBasePrice: number = 1000
+    public static manualWorkBasePrice: number = 1
     public static cpuPriceExp: number = 1.15
 
     public static possibleCpuUpgrades: cpuUpgradeDefinition[] = [
-        { id: 1, name: 'Abacus', mhz: 1, basePrice: 10, image: 'abacus' },
+        { id: 1, name: 'Abacus', mhz: 1, basePrice: 10, image: 'pixelize-test' },
         { id: 2, name: '80s computer', mhz: 12, basePrice: 100, image: 'old-computer' },
         { id: 3, name: 'Junkyard scrap', mhz: 66, basePrice: 1500, image: 'scrap-yard' },
         { id: 4, name: 'Used phone', mhz: 133, basePrice: 1000 * 20, image: 'mobile-phone' },

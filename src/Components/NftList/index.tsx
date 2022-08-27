@@ -1,5 +1,4 @@
 import images, { icons } from "../../assets";
-import GameState from "../../Code/GameState";
 import "./index.css";
 
 interface NftListProps {
@@ -24,8 +23,8 @@ function NftList(props: NftListProps): JSX.Element {
           props.onClick(k);
         }}
         style={{
-          width: "128px",
-          height: "128px",
+          width: "100px",
+          height: "100px",
           margin: "3px",
           border: "3px outset grey",
           filter: isOwned ? filterOwned : filterUnknown,

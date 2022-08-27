@@ -8,7 +8,6 @@ function Cpu(): JSX.Element {
         <div>Your super computer</div>
         <div>{GameState.totalMhz} Mhz</div>
         <div>Cores: {GameState.cpuCount}</div>
-        <div>Income per second: ${GameState.incomePerSec.toFixed(1)}</div>
         {/* <div>
           Image building progress: {GameState.current.cpuProgress.toFixed(1)}%
         </div> */}

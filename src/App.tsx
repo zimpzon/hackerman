@@ -9,6 +9,7 @@ import images, { icons } from "./assets";
 import GameState from "./Code/GameState";
 import { usePixi } from "./Code/pixiHook";
 import NftList from "./Components/NftList";
+import { formatMoney } from "./Code/format";
 
 export function App() {
   const pixies = usePixi();
@@ -29,6 +30,7 @@ export function App() {
     bl.instance = new bl();
 
     return () => {
+      console.log("Stopping timer");
       clearInterval(tick.current);
     };
   }, []);
@@ -45,12 +47,16 @@ export function App() {
   return (
     <div className="mainLayoutGrid">
       <div className="moneyDiv level1Area">
-        <button onClick={() => GameState.save()}>Save</button>
-        <button onClick={() => GameState.load()}>Load</button>
-        <button onClick={() => GameState.reset()}>Reset</button>
-        <div id="moneyText">$0</div>
+        <div id="moneyText">0</div>
+        <div id="incomeText">Per second: $0</div>
       </div>
-      <div className="nftInfoDiv level1Area"></div>
+      <div className="nftInfoDiv level1Area">
+        <div style={{ float: "right" }}>
+          <button onClick={() => GameState.save()}>Save</button>
+          <button onClick={() => GameState.load()}>Load</button>
+          <button onClick={() => GameState.reset()}>Reset</button>
+        </div>
+      </div>
       <div className="cpuAreaDiv level1Area">
         <div className="manualButtonDiv">
           <ManualWorkButton onClick={bl.onManualWorkDone} />

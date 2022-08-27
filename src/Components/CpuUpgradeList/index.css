@@ -10,11 +10,12 @@
     border-bottom: 1px solid #aaa;
     border-right: 1px solid #aaa;
     background-size: contain;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-position: left top;
     font-size: 14px;
-    text-shadow: 1px 1px 1px #fff;
+    text-shadow: 1px 1px 1px rgb(180, 180, 180);
     font-weight: bold;
+    inset: 0em;
 }
 
 .canAfford {

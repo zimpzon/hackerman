@@ -1,4 +1,5 @@
 import FloatingText from "./FloatingText";
+import { formatMoney } from "./format";
 import GameData from "./GameData";
 import GameState from "./GameState";
 
@@ -8,27 +9,17 @@ class bl {
     public static readonly tickMs: number = 100.0
 
     private moneyText: HTMLElement | undefined
+    private incomeText: HTMLElement | undefined
     private tickCount: number = 0
     private floatingText: FloatingText
 
     constructor() {
         console.log('starting game...')
         this.moneyText = document.getElementById('moneyText') as HTMLElement
+        this.incomeText = document.getElementById('incomeText') as HTMLElement
         this.floatingText = new FloatingText()
 
         GameState.load()
-         
-        this.updateMoneyLabels()
-    }
-
-    prevMoney: number = -1;
-
-    private updateMoneyLabels() {
-        if (GameState.current.money === this.prevMoney)
-            return;
-
-        this.prevMoney = GameState.current.money
-        this.moneyText!.innerText = `$${GameState.current.money.toFixed(0)}`
     }
 
     public updateCounts() {
@@ -50,6 +41,7 @@ class bl {
 
     timeLastUpdate: number = -1;
     nextTitleUpdate: number = 0
+    nextAutoSave: number = 30000
 
     public tick() {
         const now = Date.now()
@@ -61,7 +53,7 @@ class bl {
         this.updateCounts();
         this.floatingText.removeExpired()
 
-        GameState.current.money += GameState.incomePerSec *  tickMul;
+        GameState.current.money += Math.round(GameState.incomePerSec *  tickMul * 100) / 100;
         GameState.current.maxMoney = Math.max(GameState.current.maxMoney, GameState.current.money);
 
         GameState.current.cpuProgress += GameState.totalMhz * 0.01 * tickMul;
@@ -69,17 +61,23 @@ class bl {
             GameState.current.cpuProgress = 0
         }
 
-        this.updateMoneyLabels()
+        this.moneyText!.innerText = `$${formatMoney(GameState.current.money)}`
+        this.incomeText!.innerText = `Per second: ${formatMoney(GameState.incomePerSec, true)}`
 
         if (now > this.nextTitleUpdate) {
-            document.title = `$${GameState.current.money.toFixed(0)} - hackerman`;
+            document.title = `${this.moneyText!.innerText} - hackerman`;
             this.nextTitleUpdate = now + 2000
+        }
+
+        if (now > this.nextAutoSave) {
+            console.log('Auto saving...');
+            GameState.save();
+            this.nextAutoSave = now + 30000
         }
     }
 
     public static onManualWorkDone(event: React.MouseEvent) {
         GameState.current.money += GameState.current.manualWorkValue
-        bl.instance.updateMoneyLabels()
         bl.instance.floatingText.add(`$${GameState.current.manualWorkValue.toString()}`, event.clientX, event.clientY)
     }
 }

@@ -11,7 +11,7 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
 const contextImg = require.context('./img', false, /\.jpg$/);
 export const images = importAll(contextImg);
 
-const contextIcons = require.context('./icons', false, /\.jpg$/);
+const contextIcons = require.context('./icons', false);
 export const icons = importAll(contextIcons);
 
 export default images;
