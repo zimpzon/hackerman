@@ -1,3 +1,4 @@
+import images, { icons } from "../../assets";
 import GameData, { cpuUpgradeDefinition } from "../../Code/GameData";
 import GameState from "../../Code/GameState";
 import Shop from "../../Code/Shop";
@@ -23,11 +24,13 @@ function CpuUpgradeList(): JSX.Element {
     const displayMhz = showFully ? upgDef.mhz : "?";
     const incomePerDollar = (upgDef.mhz * 0.1) / price;
 
+    // style={{ backgroundImage: "url(" + icons.get(upgDef.image) + ")" }}
+
     const btn = (
       <>
         <span key={upgDef.id}>
           <a
-            className="btn"
+            className="cpuUpgradeBtn"
             key={upgDef.id}
             onClick={canAfford ? () => onBuyClick(upgDef) : undefined}
           >

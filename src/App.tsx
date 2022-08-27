@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import Cpu from "./Components/Cpu";
-import images from "./assets";
+import images, { icons } from "./assets";
 import GameState from "./Code/GameState";
 import { usePixi } from "./Code/pixiHook";
+import NftList from "./Components/NftList";
 
 export function App() {
   const pixies = usePixi();
@@ -41,8 +42,6 @@ export function App() {
     });
   }
 
-  if (pixies) setPixiImage(images.get("1"));
-
   return (
     <div className="mainLayoutGrid">
       <div className="moneyDiv level1Area">
@@ -73,48 +72,22 @@ export function App() {
               style={{ width: "200px", height: "200px" }}
               id="pixiCanvas"
             />
-
-            {Array.from(images)
-              .slice(0, 15)
-              .map(([k, v]) => (
-                <>
-                  <img
-                    alt="abc"
-                    src={images.get(k)}
-                    style={{
-                      filter: "grayscale(1) contrast(0.015)",
-                      width: "128px",
-                      height: "128px",
-                      margin: "3px",
-                      border: "3px outset grey",
-                    }}
-                  />
-                </>
-              ))}
           </>
         </div>
         <div className="level1Area">
-          <h3>Your collection</h3>
+          <h3>
+            Your collection ({GameState.current.ownedNfts.length} /{" "}
+            {images.size})
+          </h3>
           <>
             <div className="verticalScrollArea">
-              {Array.from(images).map(([k, v]) => (
-                <>
-                  <img
-                    alt="abc"
-                    src={images.get(k)}
-                    onClick={() => {
-                      setPixiImage(v);
-                    }}
-                    style={{
-                      width: "128px",
-                      height: "128px",
-                      margin: "3px",
-                      border: "3px outset grey",
-                      filter: "grayscale(0) contrast(0.2)",
-                    }}
-                  />
-                </>
-              ))}
+              <NftList
+                ownedNfts={GameState.current.ownedNfts}
+                onClick={(key) => {
+                  GameState.current.ownedNfts.push(key);
+                  setPixiImage(images.get(key));
+                }}
+              />
             </div>
           </>
         </div>

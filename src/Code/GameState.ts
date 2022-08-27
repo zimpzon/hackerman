@@ -6,6 +6,7 @@ type gameStateType = {
     manualWorkValue: number
     cpuUpgradeCounts: number[]
     cpuProgress: number
+    ownedNfts: string[]
 }
 
 class GameState {
@@ -17,6 +18,7 @@ class GameState {
         manualWorkValue: GameData.manualWorkBasePrice,
         cpuUpgradeCounts: [],
         cpuProgress: 0,
+        ownedNfts: [],
     }
 
     public static cpuCount: number = 0
@@ -32,6 +34,7 @@ class GameState {
                 manualWorkValue: GameData.manualWorkBasePrice,
                 cpuUpgradeCounts: [],
                 cpuProgress: 0,
+                ownedNfts: [],
             }
             return
         }
