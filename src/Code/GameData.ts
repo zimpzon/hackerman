@@ -3,14 +3,14 @@ class GameData {
     public static cpuPriceExp: number = 1.15
 
     public static possibleCpuUpgrades: cpuUpgradeDefinition[] = [
-        { id: 1, name: 'Abacus', mhz: 1, basePrice: 10, image: 'pixelize-test' },
-        { id: 2, name: '80s computer', mhz: 12, basePrice: 100, image: 'old-computer' },
-        { id: 3, name: 'Junkyard scrap', mhz: 66, basePrice: 1500, image: 'scrap-yard' },
-        { id: 4, name: 'Used phone', mhz: 133, basePrice: 1000 * 20, image: 'mobile-phone' },
-        { id: 5, name: 'Black market', mhz: 466, basePrice: 1000 * 1000, image: 'black-market' },
-        { id: 6, name: 'Area 52', mhz: 1500, basePrice: 1000 * 1000 * 100, image: 'abacus' },
-        { id: 7, name: 'Mars', mhz: 20000, basePrice: 1000 * 1000 * 1000 * 10, image: 'abacus' },
-        { id: 8, name: 'Kuiper Belt', mhz: 500000, basePrice: 1000 * 1000 * 1000 * 1000 * 1000, image: 'abacus' },
+        { id: 1, name: 'Abacus', mhz: 100, basePrice: 10, image: 'pixelize-test' },
+        { id: 2, name: '80s computer', mhz: 12000, basePrice: 100, image: 'old-computer' },
+        { id: 3, name: 'Junkyard scrap', mhz: 660000, basePrice: 1500, image: 'scrap-yard' },
+        { id: 4, name: 'Used phone', mhz: 13300000, basePrice: 1000 * 20, image: 'mobile-phone' },
+        { id: 5, name: 'Black market', mhz: 466000000, basePrice: 1000 * 1000, image: 'black-market' },
+        { id: 6, name: 'Area 52', mhz: 15000000000, basePrice: 1000 * 1000 * 100, image: 'abacus' },
+        { id: 7, name: 'Mars', mhz: 2000000000000, basePrice: 1000 * 1000 * 1000 * 10, image: 'abacus' },
+        { id: 8, name: 'Kuiper Belt', mhz: 500000000000000, basePrice: 1000 * 1000 * 1000 * 1000 * 1000, image: 'abacus' },
     ];
 }
 

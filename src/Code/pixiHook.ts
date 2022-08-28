@@ -15,11 +15,16 @@ export function usePixi() {
         const pixiCanvas = document.getElementById("pixiCanvas") as HTMLCanvasElement;
         if (!pixiCanvas) throw new Error("pixiCanvas not found");
 
-        const shaderCode = document.getElementById("imageEffectShader") as HTMLScriptElement;
+        const shaderCode = document.getElementById("cpuShader") as HTMLScriptElement;
         if (!shaderCode) throw new Error("shaderCode not found");
       
         const uniforms = {
-            progress: 0
+            progress: 0,
+            count: 2,
+            cols: 4,
+            rows: 2,
+            w: 200,
+            h: 200,
         }
 
         const app = new PIXI.Application({
@@ -31,6 +36,8 @@ export function usePixi() {
 
         app.ticker.add(() => {
             uniforms.progress = (Date.now() / 1000) % 1;
+            console.log(uniforms.w);
+            
         })
 
         const filter = new PIXI.Filter(

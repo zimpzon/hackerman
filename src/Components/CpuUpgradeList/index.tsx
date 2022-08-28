@@ -1,4 +1,5 @@
 import images, { icons } from "../../assets";
+import { formatMoney } from "../../Code/format";
 import GameData, { cpuUpgradeDefinition } from "../../Code/GameData";
 import GameState from "../../Code/GameState";
 import Shop from "../../Code/Shop";
@@ -39,7 +40,7 @@ function CpuUpgradeList(): JSX.Element {
             </div>
             <div>{displayMhz} Mhz</div>
             <div className={priceClass}>
-              ${price}
+              ${formatMoney(price)}
               {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}
             </div>
           </a>

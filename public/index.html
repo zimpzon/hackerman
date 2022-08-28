@@ -1,6 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script id="cpuShader" type="shader">
+      precision highp float;
+      precision highp sampler2D;
+
+      uniform highp float progress;
+      uniform highp float count;
+      uniform highp float rows;
+      uniform highp float cols;
+      uniform highp float w;
+      uniform highp float h;
+
+      varying vec2 vTextureCoord;
+      uniform sampler2D uTexture;
+
+      float rand(vec2 co){
+        return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+      }
+
+      void main() {
+        vec2 uv = vTextureCoord;
+        float x = uv.x * w;
+        float y = uv.y * h;
+
+        float aspect = w / h;
+        float cellW = w / cols;
+        float cellH = h / rows;
+        if (aspect >= 1.0) {
+          cellW = cellH;
+          x *= (w / h);
+        }
+        if (aspect < 1.0) {
+          cellH = cellW;
+        }
+
+        vec2 xy = vec2(x, y);
+        
+        float cellX = floor(x / cellW);
+        float cellY = floor(y / cellH);
+        float cellXPos = cellX * cellW;
+        float cellYPos = cellY * cellH;
+        vec2 cellMid = vec2(cellXPos + cellW * 0.5, cellYPos + cellH * 0.5);
+
+        float hide = cellX + (cellY * cols) >= count ? 0.0 : 1.0;
+
+        float distanceToCellMidNormalized = (length(xy - cellMid) * 2.0) / cellW;
+        float r = distanceToCellMidNormalized;
+        vec4 c = vec4(r, cellX / 4.0, 0.0, 1.0);
+      
+        gl_FragColor = c;
+      }
+    </script>
+
     <script id="imageEffectShader" type="shader">
       precision highp float;
       precision highp sampler2D;
@@ -28,6 +80,7 @@
         vec2 uv2 = uv;
         uv2.x = 0.0;
         float rnd = rand(uv2);
+        rnd = clamp(rnd, 0.0, 1.0);
         uv.x += rnd * progress;
         uv.x = pingpong(uv.x, 1.0);
         vec4 c = texture2D(uTexture, uv);

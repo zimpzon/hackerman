@@ -9,7 +9,7 @@ import images, { icons } from "./assets";
 import GameState from "./Code/GameState";
 import { usePixi } from "./Code/pixiHook";
 import NftList from "./Components/NftList";
-import { formatMoney } from "./Code/format";
+import CpuLights from "./Components/CpuLights";
 
 export function App() {
   const pixies = usePixi();
@@ -34,16 +34,6 @@ export function App() {
       clearInterval(tick.current);
     };
   }, []);
-
-  function setPixiImage(url: string) {
-    if (!pixies) throw Error("missing pixies");
-    console.log(formatMoney(1000 * 1000));
-
-    PIXI.Texture.fromURL(url).then((tex) => {
-      pixies.imageEffectSprite.texture = tex;
-      pixies.app.renderer.render(pixies.app.stage);
-    });
-  }
 
   return (
     <div className="mainLayoutGrid">
@@ -74,12 +64,7 @@ export function App() {
       <div className="nftAreaDiv level1Area">
         <div className="level1Area">
           <h3>Candidates / Building</h3>
-          <>
-            <canvas
-              style={{ width: "200px", height: "200px" }}
-              id="pixiCanvas"
-            />
-          </>
+          <CpuLights />
         </div>
         <div className="level1Area">
           <h3>
@@ -92,7 +77,6 @@ export function App() {
                 ownedNfts={GameState.current.ownedNfts}
                 onClick={(key) => {
                   GameState.current.ownedNfts.push(key);
-                  setPixiImage(images.get(key));
                 }}
               />
             </div>
