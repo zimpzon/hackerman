@@ -37,6 +37,7 @@ export function App() {
 
   function setPixiImage(url: string) {
     if (!pixies) throw Error("missing pixies");
+    console.log(formatMoney(1000 * 1000));
 
     PIXI.Texture.fromURL(url).then((tex) => {
       pixies.imageEffectSprite.texture = tex;
