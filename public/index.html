@@ -9,45 +9,40 @@
       uniform highp float count;
       uniform highp float rows;
       uniform highp float cols;
-      uniform highp float w;
-      uniform highp float h;
 
       varying vec2 vTextureCoord;
       uniform sampler2D uTexture;
 
-      float rand(vec2 co){
+      float rand(vec2 co) {
         return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
       }
 
       void main() {
         vec2 uv = vTextureCoord;
-        float x = uv.x * w;
-        float y = uv.y * h;
 
-        float aspect = w / h;
-        float cellW = w / cols;
-        float cellH = h / rows;
-        if (aspect >= 1.0) {
-          cellW = cellH;
-          x *= (w / h);
-        }
-        if (aspect < 1.0) {
-          cellH = cellW;
-        }
+        float cellW = 1.0 / cols;
+        float cellH = 1.0 / rows;
+        float ar = cellW / cellH;
 
-        vec2 xy = vec2(x, y);
-        
-        float cellX = floor(x / cellW);
-        float cellY = floor(y / cellH);
+        float cellX = floor(uv.x / cellW);
+        float cellY = floor(uv.y / cellH);
         float cellXPos = cellX * cellW;
         float cellYPos = cellY * cellH;
         vec2 cellMid = vec2(cellXPos + cellW * 0.5, cellYPos + cellH * 0.5);
 
         float hide = cellX + (cellY * cols) >= count ? 0.0 : 1.0;
 
-        float distanceToCellMidNormalized = (length(xy - cellMid) * 2.0) / cellW;
-        float r = distanceToCellMidNormalized;
-        vec4 c = vec4(r, cellX / 4.0, 0.0, 1.0);
+        float diffX = uv.x - cellMid.x;
+        float diffY = (uv.y - cellMid.y) * ar;
+
+        float on = rand(vec2(cellX, cellY)) > progress ? 1.2 : 0.5;
+        
+        float soft = 1.0 - (length(vec2(diffX, diffY)) / (cellH * ar * 0.5));
+        float hard = soft > 0.5 ? 0.5 : 0.0;
+        float d = on > 0.5 ? (soft * 1.0) + hard : hard;
+
+        d *= hide;
+        vec4 c = vec4(0.0, d, 0.0, 1.0);
       
         gl_FragColor = c;
       }

@@ -1,5 +1,7 @@
 import * as PIXI from "pixi.js";
 import { useEffect, useState } from "react";
+import { icons } from "../assets";
+import GameState from "./GameState";
 
 type pixiesType = {
     app: PIXI.Application
@@ -18,27 +20,20 @@ export function usePixi() {
         const shaderCode = document.getElementById("cpuShader") as HTMLScriptElement;
         if (!shaderCode) throw new Error("shaderCode not found");
       
+        // Solution: cols in whole numbers, rows with decimals to match size.
         const uniforms = {
             progress: 0,
-            count: 2,
-            cols: 4,
-            rows: 2,
-            w: 200,
-            h: 200,
+            count: 0,
+            cols: 100,
+            rows: 14,
         }
 
         const app = new PIXI.Application({
             backgroundColor: 0x6060a0,
             view: pixiCanvas,
-            width: pixiCanvas.width,
-            height: pixiCanvas.height
+            width: 1000,
+            height: 1000
         });
-
-        app.ticker.add(() => {
-            uniforms.progress = (Date.now() / 1000) % 1;
-            console.log(uniforms.w);
-            
-        })
 
         const filter = new PIXI.Filter(
             undefined,
@@ -51,6 +46,9 @@ export function usePixi() {
         spr.height = app.view.height;
         spr.filters = [filter];
         app.stage.addChild(spr);
+        PIXI.Texture.fromURL(icons.get('white-circle')).then((tex) => {
+            spr.texture = tex;
+        });
 
         const pix: pixiesType = {
             app: app,
@@ -60,6 +58,11 @@ export function usePixi() {
         }
 
         setPixies(pix)
+
+        app.ticker.add(() => {
+            pix.imageEffectUniforms.count = GameState.cpuCount + 10000;
+            pix.imageEffectUniforms.progress = (Date.now() / 1000) % 1;
+        })
     }, [])
 
     return pixies

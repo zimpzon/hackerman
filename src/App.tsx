@@ -12,7 +12,6 @@ import NftList from "./Components/NftList";
 import CpuLights from "./Components/CpuLights";
 
 export function App() {
-  const pixies = usePixi();
   const tick = useRef<NodeJS.Timer>();
 
   const { upgradeCpuButtonsTick, setUpgradeCpuButtonsTick } =

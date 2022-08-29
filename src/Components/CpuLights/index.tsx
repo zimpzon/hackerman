@@ -1,24 +1,15 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { usePixi } from "../../Code/pixiHook";
 
 function CpuLights(): JSX.Element {
   const ref = useRef<any>(null);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
   const pixies = usePixi();
 
-  useEffect(() => {
-    if (pixies) {
-      pixies.imageEffectUniforms.w = width;
-      pixies.imageEffectUniforms.h = height;
-      console.log(width);
-    }
-  }, []);
+  if (pixies) {
+    pixies.imageEffectUniforms.w = ref.current.clientWidth;
+    pixies.imageEffectUniforms.h = ref.current.clientHeight;
+  }
 
-  useLayoutEffect(() => {
-    setWidth(ref.current.clientWidth);
-    setHeight(ref.current.clientHeight);
-  }, []);
   return (
     <canvas
       ref={ref}
