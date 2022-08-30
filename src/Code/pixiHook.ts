@@ -2,6 +2,7 @@ import * as PIXI from "pixi.js";
 import { useEffect, useState } from "react";
 import { icons } from "../assets";
 import GameState from "./GameState";
+import bl from "./bl";
 
 type pixiesType = {
     app: PIXI.Application
@@ -60,8 +61,8 @@ export function usePixi() {
         setPixies(pix)
 
         app.ticker.add(() => {
-            pix.imageEffectUniforms.count = GameState.cpuCount + 10000;
-            pix.imageEffectUniforms.progress = (Date.now() / 1000) % 1;
+            pix.imageEffectUniforms.count = GameState.cpuCount + 1000000;
+            pix.imageEffectUniforms.progress = (bl.instance.tickCount / 100) % 10000;
         })
     }, [])
 

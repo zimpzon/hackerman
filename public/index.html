@@ -13,8 +13,8 @@
       varying vec2 vTextureCoord;
       uniform sampler2D uTexture;
 
-      float rand(vec2 co) {
-        return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+      float rand(vec2 co, float v) {
+        return fract(sin(dot(co, vec2(12.9898, 78.233)) + v) * 43758.5453);
       }
 
       void main() {
@@ -35,7 +35,7 @@
         float diffX = uv.x - cellMid.x;
         float diffY = (uv.y - cellMid.y) * ar;
 
-        float on = rand(vec2(cellX, cellY)) > progress ? 1.2 : 0.5;
+        float on = rand(vec2(cellX, cellY), progress) > 0.01 ? 1.0 : 0.5;
         
         float soft = 1.0 - (length(vec2(diffX, diffY)) / (cellH * ar * 0.5));
         float hard = soft > 0.5 ? 0.5 : 0.0;

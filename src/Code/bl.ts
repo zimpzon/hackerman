@@ -10,7 +10,7 @@ class bl {
 
     private moneyText: HTMLElement | undefined
     private incomeText: HTMLElement | undefined
-    private tickCount: number = 0
+    public tickCount: number = 0
     private floatingText: FloatingText
 
     constructor() {
