@@ -21,16 +21,15 @@ export function usePixi() {
         const shaderCode = document.getElementById("cpuShader") as HTMLScriptElement;
         if (!shaderCode) throw new Error("shaderCode not found");
       
-        // Solution: cols in whole numbers, rows with decimals to match size.
         const uniforms = {
             progress: 0,
             count: 0,
-            cols: 100,
-            rows: 14,
+            // 5:1 - 40, 8; 30, 6; etc.
+            cols: 30,
+            rows: 6,
         }
-
         const app = new PIXI.Application({
-            backgroundColor: 0x6060a0,
+            backgroundColor: 0x707070,
             view: pixiCanvas,
             width: 1000,
             height: 1000
@@ -61,8 +60,8 @@ export function usePixi() {
         setPixies(pix)
 
         app.ticker.add(() => {
-            pix.imageEffectUniforms.count = GameState.cpuCount + 1000000;
-            pix.imageEffectUniforms.progress = (bl.instance.tickCount / 100) % 10000;
+            pix.imageEffectUniforms.count = GameState.cpuCount;
+            pix.imageEffectUniforms.progress = (bl.instance.tickCount) % 10000;
         })
     }, [])
 

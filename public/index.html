@@ -35,15 +35,14 @@
         float diffX = uv.x - cellMid.x;
         float diffY = (uv.y - cellMid.y) * ar;
 
-        float on = rand(vec2(cellX, cellY), progress) > 0.01 ? 1.0 : 0.5;
+        float on = rand(vec2(cellX, cellY), progress) > 0.9 ? 1.0 : 0.5;
         
         float soft = 1.0 - (length(vec2(diffX, diffY)) / (cellH * ar * 0.5));
         float hard = soft > 0.5 ? 0.5 : 0.0;
         float d = on > 0.5 ? (soft * 1.0) + hard : hard;
 
         d *= hide;
-        vec4 c = vec4(0.0, d, 0.0, 1.0);
-      
+        vec4 c = vec4(0.0, d, 0.0, d);
         gl_FragColor = c;
       }
     </script>

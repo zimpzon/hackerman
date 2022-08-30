@@ -1,4 +1,5 @@
 import GameState from "../../Code/GameState";
+import CpuLights from "../CpuLights";
 import "./index.css";
 
 function Cpu(): JSX.Element {
@@ -8,6 +9,7 @@ function Cpu(): JSX.Element {
         <div>Your super computer</div>
         <div>{GameState.totalMhz} Mhz</div>
         <div>Cores: {GameState.cpuCount}</div>
+        <CpuLights />
         {/* <div>
           Image building progress: {GameState.current.cpuProgress.toFixed(1)}%
         </div> */}

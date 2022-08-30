@@ -1,15 +1,12 @@
-import * as PIXI from "pixi.js";
 import ManualWorkButton from "./Components/Work/ManualWorkButton";
 import bl from "./Code/bl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import Cpu from "./Components/Cpu";
-import images, { icons } from "./assets";
+import images from "./assets";
 import GameState from "./Code/GameState";
-import { usePixi } from "./Code/pixiHook";
 import NftList from "./Components/NftList";
-import CpuLights from "./Components/CpuLights";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -63,7 +60,6 @@ export function App() {
       <div className="nftAreaDiv level1Area">
         <div className="level1Area">
           <h3>Candidates / Building</h3>
-          <CpuLights />
         </div>
         <div className="level1Area">
           <h3>
