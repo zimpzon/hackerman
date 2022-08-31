@@ -1,3 +1,4 @@
+import { Chart, registerables  } from "chart.js";
 import FloatingText from "./FloatingText";
 import { formatMoney } from "./format";
 import GameData from "./GameData";
@@ -10,6 +11,7 @@ class bl {
 
     private moneyText: HTMLElement | undefined
     private incomeText: HTMLElement | undefined
+    private incomeChart: Chart | undefined = undefined;
     public tickCount: number = 0
     private floatingText: FloatingText
 
@@ -17,10 +19,32 @@ class bl {
         console.log('starting game...')
         this.moneyText = document.getElementById('moneyText') as HTMLElement
         this.incomeText = document.getElementById('incomeText') as HTMLElement
+        if (this.incomeChart)
+            this.incomeChart.destroy()
+
+        const chartCanvas = (<HTMLCanvasElement> document.getElementById('incomeChart')).getContext('2d');
+        if (!chartCanvas) throw new Error('chart canvas not found');
+
+        Chart.register(...registerables)
+
+        const cfg: any =  {
+            type: 'line',
+            data: {
+                labels: [], 
+                datasets: [
+                {
+                    data: [124, 200, 300, 400, 500, 600]
+                }
+            ]
+            },
+        }
+        this.incomeChart = new Chart(chartCanvas, cfg);
+
         this.floatingText = new FloatingText()
 
         GameState.load()
     }
+    chartData: number[] = []
 
     public updateCounts() {
         GameState.cpuCount = 0

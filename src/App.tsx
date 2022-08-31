@@ -42,6 +42,7 @@ export function App() {
           <button onClick={() => GameState.save()}>Save</button>
           <button onClick={() => GameState.load()}>Load</button>
           <button onClick={() => GameState.reset()}>Reset</button>
+          <canvas id="incomeChart" width="800" height="200"></canvas>
         </div>
       </div>
       <div className="cpuAreaDiv level1Area">
