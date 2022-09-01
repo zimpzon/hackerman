@@ -1,59 +1,68 @@
-import GameData from "./GameData"
+import GameData from "./GameData";
 
 type gameStateType = {
-    money: number
-    maxMoney: number
-    manualWorkValue: number
-    cpuUpgradeCounts: number[]
-    cpuProgress: number
-    ownedNfts: string[]
-}
+  money: number;
+  maxMoney: number;
+  manualWorkValue: number;
+  cpuUpgradeCounts: number[];
+  cpuProgress: number;
+  ownedNfts: string[];
+};
 
 class GameState {
-    private static storageKey: string = 'save-game'
+  private static storageKey: string = "save-game";
 
-    public static current: gameStateType = {
+  public static current: gameStateType = {
+    money: 0,
+    maxMoney: 0,
+    manualWorkValue: GameData.manualWorkBasePrice,
+    cpuUpgradeCounts: [],
+    cpuProgress: 0,
+    ownedNfts: [],
+  };
+
+  public static cpuCount: number = 0;
+  public static totalMhz: number = 0;
+  public static incomePerSec: number = 0;
+
+  public static load() {
+    console.log("-2");
+    const json = localStorage.getItem(GameState.storageKey);
+    if (!json) {
+      console.log("-1");
+      this.current = {
         money: 0,
         maxMoney: 0,
         manualWorkValue: GameData.manualWorkBasePrice,
         cpuUpgradeCounts: [],
         cpuProgress: 0,
         ownedNfts: [],
+      };
+      return;
     }
 
-    public static cpuCount: number = 0
-    public static totalMhz: number = 0
-    public static incomePerSec: number = 0
-    
-    public static load() {
-        const json = localStorage.getItem(GameState.storageKey)
-        if (!json) {
-            this.current = {
-                money: 0,
-                maxMoney: 0,
-                manualWorkValue: GameData.manualWorkBasePrice,
-                cpuUpgradeCounts: [],
-                cpuProgress: 0,
-                ownedNfts: [],
-            }
-            return
-        }
+    console.log("0");
 
-        GameState.current = JSON.parse(json) as gameStateType
+    GameState.current = JSON.parse(json) as gameStateType;
 
-        // Set lenght to dynamically adjust to more upgrades implemented.
-        GameState.current.cpuUpgradeCounts.length = GameData.possibleCpuUpgrades.length
-    }
-    
-    public static save() {
-        const json = JSON.stringify(GameState.current)
-        localStorage.setItem(GameState.storageKey, json)
-    }
+    console.log("1: " + GameState.current.cpuUpgradeCounts.length);
+    console.log("2: " + GameData.possibleCpuUpgrades.length);
 
-    public static reset() {
-        localStorage.removeItem(GameState.storageKey)
-        this.load()
-    }
+    // Set lenght to dynamically adjust to more upgrades implemented.
+    GameState.current.cpuUpgradeCounts.length =
+      GameData.possibleCpuUpgrades.length;
+    console.log("3");
+  }
+
+  public static save() {
+    const json = JSON.stringify(GameState.current);
+    localStorage.setItem(GameState.storageKey, json);
+  }
+
+  public static reset() {
+    localStorage.removeItem(GameState.storageKey);
+    this.load();
+  }
 }
 
-export default GameState
+export default GameState;
