@@ -1,109 +1,123 @@
-import { Chart, registerables  } from "chart.js";
+import { Chart, registerables } from "chart.js";
 import FloatingText from "./FloatingText";
 import { formatMoney } from "./format";
 import GameData from "./GameData";
 import GameState from "./GameState";
 
 class bl {
-    public static instance: bl
+  public static instance: bl;
 
-    public static readonly tickMs: number = 100.0
+  public static readonly tickMs: number = 100.0;
 
-    private moneyText: HTMLElement | undefined
-    private incomeText: HTMLElement | undefined
-    private incomeChart: Chart | undefined = undefined;
-    public tickCount: number = 0
-    private floatingText: FloatingText
+  private moneyText: HTMLElement | undefined;
+  private incomeText: HTMLElement | undefined;
+  private incomeChart: Chart | undefined = undefined;
+  public tickCount: number = 0;
+  private floatingText: FloatingText;
 
-    constructor() {
-        console.log('starting game...')
-        this.moneyText = document.getElementById('moneyText') as HTMLElement
-        this.incomeText = document.getElementById('incomeText') as HTMLElement
-        if (this.incomeChart)
-            this.incomeChart.destroy()
+  constructor() {
+    console.log("starting game...");
+    this.moneyText = document.getElementById("moneyText") as HTMLElement;
+    this.incomeText = document.getElementById("incomeText") as HTMLElement;
+    if (this.incomeChart) this.incomeChart.destroy();
 
-        const chartCanvas = (<HTMLCanvasElement> document.getElementById('incomeChart')).getContext('2d');
-        if (!chartCanvas) throw new Error('chart canvas not found');
+    const chartCanvas = (<HTMLCanvasElement>(
+      document.getElementById("incomeChart")
+    )).getContext("2d");
+    if (!chartCanvas) throw new Error("chart canvas not found");
 
-        Chart.register(...registerables)
+    Chart.register(...registerables);
 
-        const cfg: any =  {
-            type: 'line',
-            data: {
-                labels: [], 
-                datasets: [
-                {
-                    data: [124, 200, 300, 400, 500, 600]
-                }
-            ]
-            },
-        }
-        this.incomeChart = new Chart(chartCanvas, cfg);
+    const cfg: any = {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [
+          {
+            data: [124, 200, 300, 400, 500, 600],
+          },
+        ],
+      },
+    };
+    this.incomeChart = new Chart(chartCanvas, cfg);
 
-        this.floatingText = new FloatingText()
+    this.floatingText = new FloatingText();
 
-        GameState.load()
-    }
-    chartData: number[] = []
+    GameState.load();
+  }
+  chartData: number[] = [];
 
-    public updateCounts() {
-        GameState.cpuCount = 0
-        GameState.totalMhz = 0
+  public updateCounts() {
+    GameState.cpuCount = 0;
+    GameState.totalGhz = 0;
 
-        for (let i = 0; i < GameState.current.cpuUpgradeCounts.length; ++i) {
-            if (!GameState.current.cpuUpgradeCounts[i])
-                continue;
-                
-            const count: number = GameState.current.cpuUpgradeCounts[i]
-            GameState.cpuCount += count;
-            const upg = GameData.possibleCpuUpgrades[i];
-            GameState.totalMhz += upg.mhz * count;
-        }
+    for (let i = 0; i < GameState.current.cpuUpgradeCounts.length; ++i) {
+      if (!GameState.current.cpuUpgradeCounts[i]) continue;
 
-        GameState.incomePerSec = GameState.totalMhz * 0.1
+      const count: number = GameState.current.cpuUpgradeCounts[i];
+      GameState.cpuCount += count;
+      const upg = GameData.possibleCpuUpgrades[i];
+      GameState.totalGhz += upg.ghz * count;
     }
 
-    timeLastUpdate: number = -1;
-    nextTitleUpdate: number = 0
-    nextAutoSave: number = 30000
+    GameState.incomePerSec = GameState.totalGhz;
+  }
 
-    public tick() {
-        const now = Date.now()
-        const MaxTick = 10000
-        const tickMul = this.timeLastUpdate < 0 ? 0 : Math.min(MaxTick, (now - this.timeLastUpdate)) / 1000
-        this.timeLastUpdate = now
+  timeLastUpdate: number = -1;
+  nextTitleUpdate: number = 0;
+  nextAutoSave: number = 30000;
 
-        this.tickCount++
-        this.updateCounts();
-        this.floatingText.removeExpired()
+  public tick() {
+    const now = Date.now();
+    const MaxTick = 10000;
+    const tickMul =
+      this.timeLastUpdate < 0
+        ? 0
+        : Math.min(MaxTick, now - this.timeLastUpdate) / 1000;
+    this.timeLastUpdate = now;
 
-        GameState.current.money += Math.round(GameState.incomePerSec *  tickMul * 100) / 100;
-        GameState.current.maxMoney = Math.max(GameState.current.maxMoney, GameState.current.money);
+    this.tickCount++;
+    this.updateCounts();
+    this.floatingText.removeExpired();
 
-        GameState.current.cpuProgress += GameState.totalMhz * 0.01 * tickMul;
-        if (GameState.current.cpuProgress >= 100) {
-            GameState.current.cpuProgress = 0
-        }
+    GameState.current.money +=
+      Math.round(GameState.incomePerSec * tickMul * 100) / 100;
+    GameState.current.maxMoney = Math.max(
+      GameState.current.maxMoney,
+      GameState.current.money
+    );
 
-        this.moneyText!.innerText = `$${formatMoney(GameState.current.money)}`
-        this.incomeText!.innerText = `Per second: ${formatMoney(GameState.incomePerSec, true)}`
-
-        if (now > this.nextTitleUpdate) {
-            document.title = `${this.moneyText!.innerText} - hackerman`;
-            this.nextTitleUpdate = now + 2000
-        }
-
-        if (now > this.nextAutoSave) {
-            console.log('Auto saving...');
-            GameState.save();
-            this.nextAutoSave = now + 30000
-        }
+    GameState.current.cpuProgress += GameState.totalGhz * 0.01 * tickMul;
+    if (GameState.current.cpuProgress >= 100) {
+      GameState.current.cpuProgress = 0;
     }
 
-    public static onManualWorkDone(event: React.MouseEvent) {
-        GameState.current.money += GameState.current.manualWorkValue
-        bl.instance.floatingText.add(`$${GameState.current.manualWorkValue.toString()}`, event.clientX, event.clientY)
+    this.moneyText!.innerText = `$${formatMoney(GameState.current.money)}`;
+    this.incomeText!.innerText = `Per second: ${formatMoney(
+      GameState.incomePerSec,
+      true
+    )}`;
+
+    if (now > this.nextTitleUpdate) {
+      document.title = `${this.moneyText!.innerText} - hackerman`;
+      this.nextTitleUpdate = now + 2000;
     }
+
+    if (now > this.nextAutoSave) {
+      console.log("Auto saving...");
+      GameState.save();
+      this.nextAutoSave = now + 30000;
+    }
+  }
+
+  public static onManualWorkDone(event: React.MouseEvent) {
+    GameState.current.money += GameState.current.manualWorkValue;
+    bl.instance.floatingText.add(
+      `$${GameState.current.manualWorkValue.toString()}`,
+      event.clientX,
+      event.clientY
+    );
+  }
 }
 
-export default bl
+export default bl;

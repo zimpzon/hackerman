@@ -1,5 +1,5 @@
 import images, { icons } from "../../assets";
-import { formatMoney } from "../../Code/format";
+import { formatGhz, formatMoney } from "../../Code/format";
 import GameData, { cpuUpgradeDefinition } from "../../Code/GameData";
 import GameState from "../../Code/GameState";
 import Shop from "../../Code/Shop";
@@ -22,8 +22,8 @@ function CpuUpgradeList(): JSX.Element {
     const canAfford = GameState.current.money >= price;
     const priceClass = canAfford ? "canAfford" : "cannotAfford";
     const name = showFully ? upgDef.name : "???";
-    const displayMhz = showFully ? upgDef.mhz : "?";
-    const incomePerDollar = (upgDef.mhz * 0.1) / price;
+    const displayMhz = showFully ? formatGhz(upgDef.ghz) : "?";
+    const incomePerDollar = upgDef.ghz / price;
 
     // style={{ backgroundImage: "url(" + icons.get(upgDef.image) + ")" }}
 
@@ -38,7 +38,7 @@ function CpuUpgradeList(): JSX.Element {
             <div>
               {name} ({ownedCount})
             </div>
-            <div>{displayMhz} Mhz</div>
+            <div>{displayMhz}</div>
             <div className={priceClass}>
               ${formatMoney(price)}
               {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}

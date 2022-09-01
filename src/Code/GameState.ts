@@ -22,36 +22,19 @@ class GameState {
   };
 
   public static cpuCount: number = 0;
-  public static totalMhz: number = 0;
+  public static totalGhz: number = 0;
   public static incomePerSec: number = 0;
 
   public static load() {
-    console.log("-2");
-    const json = localStorage.getItem(GameState.storageKey);
-    if (!json) {
-      console.log("-1");
-      this.current = {
-        money: 0,
-        maxMoney: 0,
-        manualWorkValue: GameData.manualWorkBasePrice,
-        cpuUpgradeCounts: [],
-        cpuProgress: 0,
-        ownedNfts: [],
-      };
-      return;
-    }
-
-    console.log("0");
+    let json =
+      localStorage.getItem(GameState.storageKey) ||
+      JSON.stringify(this.current);
 
     GameState.current = JSON.parse(json) as gameStateType;
-
-    console.log("1: " + GameState.current.cpuUpgradeCounts.length);
-    console.log("2: " + GameData.possibleCpuUpgrades.length);
 
     // Set lenght to dynamically adjust to more upgrades implemented.
     GameState.current.cpuUpgradeCounts.length =
       GameData.possibleCpuUpgrades.length;
-    console.log("3");
   }
 
   public static save() {

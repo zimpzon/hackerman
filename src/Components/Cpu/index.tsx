@@ -1,3 +1,4 @@
+import { formatGhz } from "../../Code/format";
 import GameState from "../../Code/GameState";
 import CpuLights from "../CpuLights";
 import "./index.css";
@@ -7,7 +8,7 @@ function Cpu(): JSX.Element {
     <>
       <div className="wrapper">
         <div>Your super computer</div>
-        <div>{GameState.totalMhz} Mhz</div>
+        <div>{formatGhz(GameState.totalGhz)}</div>
         <div>Cores: {GameState.cpuCount}</div>
         <CpuLights />
         {/* <div>

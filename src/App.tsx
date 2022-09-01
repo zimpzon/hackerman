@@ -64,7 +64,7 @@ export function App() {
         </div>
         <div className="level1Area">
           <h3>
-            Your collection ({GameState.current.ownedNfts.length} /{" "}
+            Your collection ({GameState.current.ownedNfts?.length} /{" "}
             {images.size})
           </h3>
           <>
