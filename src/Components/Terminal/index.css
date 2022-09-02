@@ -1,0 +1,15 @@
+#terminal {
+    height: 20vh;
+}
+:root {
+    --color: #00bf00;
+    --background: #062006;
+    --link-color: #3377FF;
+    --glow: 1;
+    --font: monospace;
+}
+
+.tv {
+    height: 100vh;
+    position: relative;
+}

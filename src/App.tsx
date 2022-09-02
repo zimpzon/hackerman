@@ -7,6 +7,7 @@ import Cpu from "./Components/Cpu";
 import images from "./assets";
 import GameState from "./Code/GameState";
 import NftList from "./Components/NftList";
+import Terminal from "./Components/Terminal";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -56,6 +57,7 @@ export function App() {
         <div className="cpuUpgradesDiv">
           <hr />
           <CpuUpgradeList></CpuUpgradeList>
+          <Terminal />
         </div>
       </div>
       <div className="nftAreaDiv level1Area">
