@@ -38,7 +38,7 @@ function CpuUpgradeList(): JSX.Element {
             <div>
               {name} ({ownedCount})
             </div>
-            <div>{displayMhz}</div>
+            <div style={{ fontSize: "xx-small" }}>{displayMhz}</div>
             <div className={priceClass}>
               ${formatMoney(price)}
               {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}

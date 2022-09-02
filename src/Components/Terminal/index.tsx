@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { pics } from "../../assets";
 import "./index.css";
 
 function Terminal(): JSX.Element {
@@ -6,7 +7,7 @@ function Terminal(): JSX.Element {
     ($("#terminal") as any).terminal(
       {
         hello: function (what: any) {
-          this.echo("Hello, " + what + ". Wellcome to this terminal.");
+          this.echo("Hello " + what);
         },
       },
       {

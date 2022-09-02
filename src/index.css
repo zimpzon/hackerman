@@ -44,6 +44,19 @@ code {
   text-shadow: 0 0 10px #fff
 }
 
+#buttCoinText {
+  padding-top: 5px;
+  font-size: 40px;
+  text-align: center;
+  text-shadow: 0 0 10px #fff
+}
+
+#buttCoinTextLabel {
+  font-size: larger;
+  text-align: center;
+  text-shadow: 0 0 10px #fff
+}
+
 .money-float {
 	color:white;
 	text-shadow: white 0px 0px 5px;

@@ -1,4 +1,5 @@
 import React from "react";
+import { icons } from "../../../assets";
 
 interface ManualWorkButtonProps {
   onClick: (event: React.MouseEvent) => void;
@@ -26,7 +27,11 @@ function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
 
   return (
     <>
-      <div id="manualWorkButton" onClick={click}></div>
+      <div
+        id="manualWorkButton"
+        style={{ backgroundImage: "url(" + icons.get("question-mark") + ")" }}
+        onClick={click}
+      ></div>
     </>
   );
 }

@@ -34,11 +34,13 @@ export function App() {
 
   return (
     <div className="mainLayoutGrid">
-      <div className="moneyDiv level1Area">
+      <div className="level1Area">
         <div id="moneyText">0</div>
         <div id="incomeText">Per second: $0</div>
       </div>
       <div className="nftInfoDiv level1Area">
+        <div id="buttCoinText">0</div>
+        <div id="buttCoinTextLabel">Buttcoin</div>
         <div style={{ float: "right" }}>
           <button onClick={() => GameState.save()}>Save</button>
           <button onClick={() => GameState.load()}>Load</button>
@@ -46,19 +48,15 @@ export function App() {
           <canvas id="incomeChart" width="800" height="200"></canvas>
         </div>
       </div>
+      <div className="level1Area topRight"></div>
       <div className="cpuAreaDiv level1Area">
         <div className="manualButtonDiv">
           <ManualWorkButton onClick={bl.onManualWorkDone} />
         </div>
         <div className="cpuGfxDiv">
-          <hr />
           <Cpu />
         </div>
-        <div className="cpuUpgradesDiv">
-          <hr />
-          <CpuUpgradeList></CpuUpgradeList>
-          <Terminal />
-        </div>
+        <Terminal />
       </div>
       <div className="nftAreaDiv level1Area">
         <div className="level1Area">
@@ -80,6 +78,9 @@ export function App() {
             </div>
           </>
         </div>
+      </div>
+      <div className="level1Area cpuUpgradesDiv">
+        <CpuUpgradeList></CpuUpgradeList>
       </div>
     </div>
   );
