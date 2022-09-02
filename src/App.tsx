@@ -41,12 +41,6 @@ export function App() {
       <div className="nftInfoDiv level1Area">
         <div id="buttCoinText">0</div>
         <div id="buttCoinTextLabel">Buttcoin</div>
-        <div style={{ float: "right" }}>
-          <button onClick={() => GameState.save()}>Save</button>
-          <button onClick={() => GameState.load()}>Load</button>
-          <button onClick={() => GameState.reset()}>Reset</button>
-          <canvas id="incomeChart" width="800" height="200"></canvas>
-        </div>
       </div>
       <div className="level1Area topRight"></div>
       <div className="cpuAreaDiv level1Area">
@@ -80,7 +74,13 @@ export function App() {
         </div>
       </div>
       <div className="level1Area cpuUpgradesDiv">
-        <CpuUpgradeList></CpuUpgradeList>
+        <CpuUpgradeList/>
+        <div >
+          <button onClick={() => GameState.save()}>Save</button>
+          <button onClick={() => GameState.load()}>Load</button>
+          <button onClick={() => GameState.reset()}>Reset</button>
+          <canvas id="incomeChart" width="800" height="200"></canvas>
+        </div>
       </div>
     </div>
   );
