@@ -56,12 +56,16 @@ class bl {
     this.updateCounts();
     this.floatingText.removeExpired();
 
-    GameState.current.money +=
-      Math.round(GameState.incomePerSec * tickMul * 100) / 100;
+    const incomeThisTick = Math.round(GameState.incomePerSec * tickMul * 100) / 100;
+    GameState.current.money += incomeThisTick;
     GameState.current.maxMoney = Math.max(
       GameState.current.maxMoney,
       GameState.current.money
     );
+
+    GameState.current.coinProgress += 0.001;
+    if (GameState.current.coinProgress > 1)
+      GameState.current.coinProgress = 0.0;
 
     GameState.current.cpuProgress += GameState.totalGhz * 0.01 * tickMul;
     if (GameState.current.cpuProgress >= 100) {

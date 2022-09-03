@@ -7,6 +7,8 @@ type gameStateType = {
   cpuUpgradeCounts: number[];
   cpuProgress: number;
   ownedNfts: string[];
+  coinProgress: number;
+  totalCoins: number;
 };
 
 class GameState {
@@ -19,6 +21,8 @@ class GameState {
     cpuUpgradeCounts: [],
     cpuProgress: 0,
     ownedNfts: [],
+    coinProgress: 0,
+    totalCoins: 0
   };
 
   public static cpuCount: number = 0;

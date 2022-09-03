@@ -14,5 +14,9 @@
 }
 
 .progressBack {
-    background-color: green;
+    background-color: #606060;
+}
+
+.progressFill {
+    background-color: #00c000;
 }

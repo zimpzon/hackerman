@@ -65,8 +65,9 @@ export function App() {
       <div>Colorful (0 / x) +10% income</div>
       <div>Magical Places (0 / x) -10% cpu prices</div>
       <div>Creatures (0 / x) -10% on all upgrade prices</div>
-      <div>Friendly (0 / x) +20% faster Buttcoins</div>
-      <div>Scary (0 / x) +1 to all owned cpus</div>
+      <div>Friendly (0 / x) +10% faster Buttcoins</div>
+      <div>Scary (0 / x) +2% chance of double income for 1 min</div>
+      <div>Epic (0 / x) +10% more of all owned cpus</div>
       </div>
     </div>
   );
