@@ -18,4 +18,7 @@ export const icons = importAll(contextIcons);
 const contextPics = require.context("./pics", false);
 export const pics = importAll(contextPics);
 
+const contextCharacters = require.context("./characters", false);
+export const characters = importAll(contextCharacters);
+
 export default images;

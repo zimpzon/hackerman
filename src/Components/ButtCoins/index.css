@@ -1,0 +1,18 @@
+.coinArea {
+    display: flex;
+}
+
+.currentCoins {
+    width: 400px;
+    text-align: center;
+}
+
+.rebootCoins {
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+}
+
+.progressBack {
+    background-color: green;
+}

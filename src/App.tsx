@@ -4,10 +4,12 @@ import { useEffect, useRef } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import Cpu from "./Components/Cpu";
-import images from "./assets";
+import images, { icons, pics } from "./assets";
 import GameState from "./Code/GameState";
 import NftList from "./Components/NftList";
 import Terminal from "./Components/Terminal";
+import Slider from "./Components/Slider";
+import Buttcoins from "./Components/ButtCoins";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -34,15 +36,13 @@ export function App() {
 
   return (
     <div className="mainLayoutGrid">
-      <div className="level1Area">
+      <div className="level1Area cell0_0">
         <div id="moneyText">0</div>
         <div id="incomeText">Per second: $0</div>
       </div>
-      <div className="nftInfoDiv level1Area">
-        <div id="buttCoinText">0</div>
-        <div id="buttCoinTextLabel">Buttcoin</div>
+      <div className="level1Area">
+        <Buttcoins/>
       </div>
-      <div className="level1Area topRight"></div>
       <div className="cpuAreaDiv level1Area">
         <div className="manualButtonDiv">
           <ManualWorkButton onClick={bl.onManualWorkDone} />
@@ -50,37 +50,23 @@ export function App() {
         <div className="cpuGfxDiv">
           <Cpu />
         </div>
-        <Terminal />
-      </div>
-      <div className="nftAreaDiv level1Area">
-        <div className="level1Area">
-          <h3>Candidates / Building</h3>
-        </div>
-        <div className="level1Area">
-          <h3>
-            Your collection ({GameState.current.ownedNfts?.length} /{" "}
-            {images.size})
-          </h3>
-          <>
-            <div className="verticalScrollArea">
-              <NftList
-                ownedNfts={GameState.current.ownedNfts}
-                onClick={(key) => {
-                  GameState.current.ownedNfts.push(key);
-                }}
-              />
-            </div>
-          </>
-        </div>
-      </div>
-      <div className="level1Area cpuUpgradesDiv">
+        <div className="level1Area cpuUpgradesDiv">
         <CpuUpgradeList/>
         <div >
           <button onClick={() => GameState.save()}>Save</button>
           <button onClick={() => GameState.load()}>Load</button>
           <button onClick={() => GameState.reset()}>Reset</button>
-          <canvas id="incomeChart" width="800" height="200"></canvas>
+          <canvas id="incomeChart" width="800" height="50"></canvas>
+          <Terminal />
         </div>
+      </div>
+      </div>
+      <div className="nftAreaDiv level1Area">
+      <div>Colorful (0 / x) +10% income</div>
+      <div>Magical Places (0 / x) -10% cpu prices</div>
+      <div>Creatures (0 / x) -10% on all upgrade prices</div>
+      <div>Friendly (0 / x) +20% faster Buttcoins</div>
+      <div>Scary (0 / x) +1 to all owned cpus</div>
       </div>
     </div>
   );
