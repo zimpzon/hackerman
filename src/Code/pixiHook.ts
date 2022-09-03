@@ -28,9 +28,9 @@ export function usePixi() {
     const uniforms = {
       progress: 0,
       count: 0,
-      // 5:1 - 40, 8; 30, 6; etc.
-      cols: 30,
-      rows: 6,
+      // 5:1 - 40, 8; 30, 6; etc. (4:1 looks better at home...)
+      cols: 20,
+      rows: 5,
     };
     const app = new PIXI.Application({
       backgroundColor: 0x707070,
