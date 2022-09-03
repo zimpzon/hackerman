@@ -16,6 +16,12 @@ body {
 	background-color: #828382;
 }
 
+.terminalFooter {
+	display: flex;
+	position: fixed;
+	bottom: 0;
+}
+
 .moneyDiv {
 	display: flex;
 }

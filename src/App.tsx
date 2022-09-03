@@ -3,13 +3,9 @@ import bl from "./Code/bl";
 import { useEffect, useRef } from "react";
 import CpuUpgradeList from "./Components/CpuUpgradeList";
 import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
-import Cpu from "./Components/Cpu";
-import images, { icons, pics } from "./assets";
 import GameState from "./Code/GameState";
-import NftList from "./Components/NftList";
 import Terminal from "./Components/Terminal";
-import Slider from "./Components/Slider";
-import Buttcoins from "./Components/ButtCoins";
+import Coins from "./Components/Coins";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -41,33 +37,32 @@ export function App() {
         <div id="incomeText">Per second: $0</div>
       </div>
       <div className="level1Area">
-        <Buttcoins/>
+        <Coins />
       </div>
       <div className="cpuAreaDiv level1Area">
         <div className="manualButtonDiv">
           <ManualWorkButton onClick={bl.onManualWorkDone} />
         </div>
-        <div className="cpuGfxDiv">
-          <Cpu />
-        </div>
         <div className="level1Area cpuUpgradesDiv">
-        <CpuUpgradeList/>
-        <div >
-          <button onClick={() => GameState.save()}>Save</button>
-          <button onClick={() => GameState.load()}>Load</button>
-          <button onClick={() => GameState.reset()}>Reset</button>
-          <canvas id="incomeChart" width="800" height="50"></canvas>
-          <Terminal />
+          <CpuUpgradeList />
+          <div>
+            <button onClick={() => GameState.save()}>Save</button>
+            <button onClick={() => GameState.load()}>Load</button>
+            <button onClick={() => GameState.reset()}>Reset</button>
+            <canvas id="incomeChart" width="800" height="1000"></canvas>
+          </div>
         </div>
-      </div>
       </div>
       <div className="nftAreaDiv level1Area">
-      <div>Colorful (0 / x) +10% income</div>
-      <div>Magical Places (0 / x) -10% cpu prices</div>
-      <div>Creatures (0 / x) -10% on all upgrade prices</div>
-      <div>Friendly (0 / x) +10% faster Buttcoins</div>
-      <div>Scary (0 / x) +4 hours of offline income</div>
-      <div>Epic (0 / x) +10% more of all owned cpus</div>
+        <div>Colorful (0 / x) +10% income</div>
+        <div>Magical Places (0 / x) -10% cpu prices</div>
+        <div>Creatures (0 / x) -10% on all upgrade prices</div>
+        <div>Friendly (0 / x) +10% faster Buttcoins</div>
+        <div>Scary (0 / x) +4 hours of offline income</div>
+        <div>Epic (0 / x) +10% more of all owned cpus</div>
+        <div className="terminalFooter">
+          <Terminal />
+        </div>
       </div>
     </div>
   );

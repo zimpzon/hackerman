@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import { icons } from "../../../assets";
-import bl from "../../../Code/bl";
+import React, { useRef, useState } from "react";
+import { formatGhz } from "../../../Code/format";
+import GameState from "../../../Code/GameState";
+import CpuLights from "../../CpuLights";
+import "./index.css";
 
 interface ManualWorkButtonProps {
   onClick: (event: React.MouseEvent) => void;
 }
 
 function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
-  const [fill, setFill] = useState(0);
+  const [invitePlayer, setInvitePlayer] = useState(0);
+  const bounceTarget = useRef<any>();
 
   const animPushDown: Keyframe[] = [
     { transform: "scale(1)" },
@@ -24,24 +27,27 @@ function ManualWorkButton({ onClick }: ManualWorkButtonProps): JSX.Element {
   const click = (e: React.MouseEvent) => {
     const element = e.currentTarget as HTMLElement;
     element.animate(animPushDown, animTiming);
-    let newFill = fill + 1;
-    if (newFill > 100) {
-      newFill -= 100;
-    }
     onClick(e);
-    setFill(newFill);
   };
+
+  if (
+    GameState.current.maxMoney < 10 &&
+    Date.now() > invitePlayer &&
+    bounceTarget.current
+  ) {
+    bounceTarget.current.animate(animPushDown, animTiming);
+    setInvitePlayer(Date.now() + 2000);
+  }
 
   return (
     <>
-      <div
-        id="manualWorkButton"
-        style={{
-          backgroundImage: "url(" + icons.get("black") + ")",
-          backgroundSize: `100% ${100 - fill}%`
-        }}
-        onClick={click}
-      />
+      <div className="cpuLayout">
+        <div className="cpuLabel">{formatGhz(GameState.totalGhz)}</div>
+        <div id="manualWorkButton" ref={bounceTarget} onClick={click}>
+          <CpuLights />
+        </div>
+        <div className="cpuLabel">Cores: {GameState.cpuCount}</div>
+      </div>
     </>
   );
 }

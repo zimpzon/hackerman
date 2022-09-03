@@ -13,7 +13,7 @@ function CpuLights(): JSX.Element {
   return (
     <canvas
       ref={ref}
-      style={{ width: "100%", height: "100px" }}
+      style={{ width: "100%", height: "100%" }}
       id="pixiCanvas"
     />
   );

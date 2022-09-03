@@ -1,5 +1,6 @@
 #terminal {
-    height: 20vh;
+   height: 200px;
+   width: 600px;
 }
 
 :root {
@@ -11,6 +12,4 @@
 }
 
 .tv {
-    height: 100vh;
-    position: relative;
 }

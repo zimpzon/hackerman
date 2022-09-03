@@ -29,14 +29,14 @@ export function usePixi() {
       progress: 0,
       count: 0,
       // 5:1 - 40, 8; 30, 6; etc. (4:1 looks better at home...)
-      cols: 20,
-      rows: 5,
+      cols: 4,
+      rows: 4,
     };
     const app = new PIXI.Application({
-      backgroundColor: 0x707070,
+      backgroundColor: 0x404040,
       view: pixiCanvas,
-      width: 1000,
-      height: 1000,
+      width: 256,
+      height: 256,
     });
 
     const filter = new PIXI.Filter(undefined, shaderCode.innerText, uniforms);
@@ -62,6 +62,9 @@ export function usePixi() {
     app.ticker.add(() => {
       pix.imageEffectUniforms.count = GameState.cpuCount;
       pix.imageEffectUniforms.progress = bl.instance.tickCount % 10000;
+      const gridSize = Math.max(6, Math.ceil(Math.sqrt(GameState.cpuCount)));
+      pix.imageEffectUniforms.cols = gridSize;
+      pix.imageEffectUniforms.rows = gridSize;
     });
   }, []);
 

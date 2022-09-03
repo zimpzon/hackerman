@@ -53,6 +53,34 @@ class GameData {
       basePrice: 1000 * 1000 * 1000 * 1000 * 1000,
       image: "abacus",
     },
+    {
+      id: 9,
+      name: "Number 9",
+      ghz: 50000,
+      basePrice: 1000 * 1000 * 1000 * 1000 * 1000,
+      image: "abacus",
+    },
+    {
+      id: 10,
+      name: "Number 10",
+      ghz: 50000,
+      basePrice: 1000 * 1000 * 1000 * 1000 * 1000,
+      image: "abacus",
+    },
+    {
+      id: 11,
+      name: "Number 11",
+      ghz: 50000,
+      basePrice: 1000 * 1000 * 1000 * 1000 * 1000,
+      image: "abacus",
+    },
+    {
+      id: 12,
+      name: "Number 12",
+      ghz: 50000,
+      basePrice: 1000 * 1000 * 1000 * 1000 * 1000,
+      image: "abacus",
+    },
   ];
 }
 
