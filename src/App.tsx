@@ -6,6 +6,7 @@ import { useUpgradeCpuButtonsTick } from "./Code/stateHooks";
 import GameState from "./Code/GameState";
 import Terminal from "./Components/Terminal";
 import Coins from "./Components/Coins";
+import CpuTabs from "./Components/CpuTabs";
 
 export function App() {
   const tick = useRef<NodeJS.Timer>();
@@ -44,7 +45,9 @@ export function App() {
           <ManualWorkButton onClick={bl.onManualWorkDone} />
         </div>
         <div className="level1Area cpuUpgradesDiv">
-          <CpuUpgradeList />
+          <CpuTabs>
+            <CpuUpgradeList />
+          </CpuTabs>
           <div>
             <button onClick={() => GameState.save()}>Save</button>
             <button onClick={() => GameState.load()}>Load</button>

@@ -1,0 +1,14 @@
+.tabLine {
+    display: flex;
+}
+
+.tabControl {
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: 0px;
+    background-color: whitesmoke
+}
+
+.tabBody {
+    background-color: whitesmoke;
+}

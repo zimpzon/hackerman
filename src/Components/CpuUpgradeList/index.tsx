@@ -27,6 +27,30 @@ function CpuUpgradeList(): JSX.Element {
 
     // style={{ backgroundImage: "url(" + icons.get(upgDef.image) + ")" }}
 
+    let secondsLeft =
+      (price - GameState.current.money) / GameState.incomePerSec + 1; // +1 to avoid showing 00:00:00 for 1 second.
+
+    let seconds = Math.floor(secondsLeft % 60)
+      .toString()
+      .padStart(2, "0");
+
+    let minutes = (Math.floor(secondsLeft / 60) % 60)
+      .toString()
+      .padStart(2, "0");
+
+    let hours = Math.floor(secondsLeft / 3600)
+      .toString()
+      .padStart(2, "0");
+
+    let displayTime =
+      GameState.incomePerSec > 0 ? `${hours}:${minutes}:${seconds}` : "?";
+
+    if (secondsLeft < 1) {
+      displayTime = "-";
+    }
+
+    const pct = (GameState.current.money / price) * 100;
+
     const btn = (
       <>
         <span key={upgDef.id}>
@@ -39,6 +63,13 @@ function CpuUpgradeList(): JSX.Element {
               {name} ({ownedCount})
             </div>
             <div style={{ fontSize: "xx-small" }}>{displayMhz}</div>
+            <div>{displayTime}</div>
+            <div className="cpuUpgradeBtnPctOuter">
+              <div
+                className="cpuUpgradeBtnPctInner"
+                style={{ width: `${pct}%` }}
+              ></div>
+            </div>{" "}
             <div className={priceClass}>
               ${formatMoney(price)}
               {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}
@@ -53,7 +84,7 @@ function CpuUpgradeList(): JSX.Element {
 
   return (
     <>
-      <div className="verticalScrollArea">{buttons}</div>
+      <div className="">{buttons}</div>
     </>
   );
 }

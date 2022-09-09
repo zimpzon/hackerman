@@ -12,10 +12,22 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left top;
+    margin: 5px;
     font-size: 14px;
     text-shadow: 1px 1px 1px rgb(180, 180, 180);
     font-weight: bold;
     inset: 0em;
+}
+
+
+.cpuUpgradeBtnPctOuter {
+    height: 10px;
+    background-color: lightgray;
+}
+
+.cpuUpgradeBtnPctInner {
+    height: 10px;
+    background-color: lightgreen;
 }
 
 .canAfford {
