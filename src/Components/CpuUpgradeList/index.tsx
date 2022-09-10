@@ -1,3 +1,4 @@
+import { rgb2hex } from "@pixi/utils";
 import images, { icons } from "../../assets";
 import { formatGhz, formatMoney } from "../../Code/format";
 import GameData, { cpuUpgradeDefinition } from "../../Code/GameData";
@@ -49,7 +50,10 @@ function CpuUpgradeList(): JSX.Element {
       displayTime = "-";
     }
 
-    const pct = (GameState.current.money / price) * 100;
+    const pct = Math.min(1, GameState.current.money / price);
+
+    const r = 255 - 255 * pct;
+    const g = 255 * pct;
 
     const btn = (
       <>
@@ -59,21 +63,26 @@ function CpuUpgradeList(): JSX.Element {
             key={upgDef.id}
             onClick={canAfford ? () => onBuyClick(upgDef) : undefined}
           >
-            <div>
-              {name} ({ownedCount})
-            </div>
-            <div style={{ fontSize: "xx-small" }}>{displayMhz}</div>
-            <div>{displayTime}</div>
-            <div className="cpuUpgradeBtnPctOuter">
-              <div
-                className="cpuUpgradeBtnPctInner"
-                style={{ width: `${pct}%` }}
-              ></div>
+            <div className="upgradeTextArea">
+              <div className="upgradeName">
+                {name} ({ownedCount})
+              </div>
+              <div style={{ fontSize: "xx-small" }}>{displayMhz}</div>
+              <div>{displayTime}</div>
+              <div className="cpuUpgradeBtnPctOuter">
+                <div
+                  className="cpuUpgradeBtnPctInner"
+                  style={{
+                    width: `${pct * 100}%`,
+                    backgroundColor: `rgb(${r}, ${g}, 1)`,
+                  }}
+                ></div>
+              </div>{" "}
+              <div className={`upgradePrice ${priceClass}`}>
+                ${formatMoney(price)}
+                {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}
+              </div>
             </div>{" "}
-            <div className={priceClass}>
-              ${formatMoney(price)}
-              {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}
-            </div>
           </a>
         </span>{" "}
       </>

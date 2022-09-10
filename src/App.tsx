@@ -48,10 +48,10 @@ export function App() {
           <CpuTabs>
             <CpuUpgradeList />
           </CpuTabs>
+          <button onClick={() => GameState.save()}>Save</button>
+          <button onClick={() => GameState.load()}>Load</button>
+          <button onClick={() => GameState.reset()}>Reset</button>
           <div>
-            <button onClick={() => GameState.save()}>Save</button>
-            <button onClick={() => GameState.load()}>Load</button>
-            <button onClick={() => GameState.reset()}>Reset</button>
             <canvas id="incomeChart" width="800" height="1000"></canvas>
           </div>
         </div>

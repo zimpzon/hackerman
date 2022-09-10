@@ -1,24 +1,33 @@
 .cpuUpgradeBtn {
-    outline: outset;
-    outline-width: 1px;
     display: block;
-    width: 100%;
+    width: 600px;
+    height: 100px;
     padding: 6px 0;
-    text-align: center;
-    border: 0px solid #ddd;
+    border: 10px solid #ddd;
     background-color: whitesmoke;
-    border-bottom: 1px solid #aaa;
-    border-right: 1px solid #aaa;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left top;
     margin: 5px;
-    font-size: 14px;
+    font-size: 24px;
     text-shadow: 1px 1px 1px rgb(180, 180, 180);
     font-weight: bold;
-    inset: 0em;
+    border-radius: 10px;
+    box-shadow:0px 0px 0px black
 }
 
+.upgradeTextArea {
+    margin-left: 50px;
+}
+
+.upgradeName {
+    font-size: 20px;
+    text-align: left;
+}
+
+.upgradePrice {
+    font-size: 20px;
+}
 
 .cpuUpgradeBtnPctOuter {
     height: 10px;
@@ -27,7 +36,7 @@
 
 .cpuUpgradeBtnPctInner {
     height: 10px;
-    background-color: lightgreen;
+    background-color: chartreuse;
 }
 
 .canAfford {

@@ -34,6 +34,8 @@ body {
 .cpuUpgradesDiv {
 	display: flex;
 	flex-direction: column;
+	position: absolute;
+	margin-left: 500px;
 }
 
 .nftAreaDiv {
