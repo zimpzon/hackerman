@@ -6,7 +6,7 @@ import GameState from "./GameState";
 class bl {
   public static instance: bl;
 
-  public static readonly tickMs: number = 100.0;
+  public static readonly tickMs: number = 200.0;
 
   private moneyText: HTMLElement | undefined;
   private incomeText: HTMLElement | undefined;
@@ -56,7 +56,8 @@ class bl {
     this.updateCounts();
     this.floatingText.removeExpired();
 
-    const incomeThisTick = Math.round(GameState.incomePerSec * tickMul * 100) / 100;
+    const incomeThisTick =
+      Math.round(GameState.incomePerSec * tickMul * 100) / 100;
     GameState.current.money += incomeThisTick;
     GameState.current.maxMoney = Math.max(
       GameState.current.maxMoney,

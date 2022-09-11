@@ -5,43 +5,71 @@
     padding: 6px 0;
     border: 10px solid #ddd;
     background-color: whitesmoke;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left top;
-    margin: 5px;
+    margin: 15px;
     font-size: 24px;
     text-shadow: 1px 1px 1px rgb(180, 180, 180);
-    font-weight: bold;
     border-radius: 10px;
-    box-shadow:0px 0px 0px black
+    text-align: left;
+}
+
+.boxGreen {
+    box-shadow: 0px 0px 10px rgb(0, 255, 0);
+}
+
+.boxRed {
+    box-shadow: 0px 0px 10px red;
 }
 
 .upgradeTextArea {
-    margin-left: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .upgradeName {
     font-size: 20px;
-    text-align: left;
+    font-weight: bold;
+}
+
+.textInner {
+    position: absolute;
+    display: flex;
+    width: 100%;
 }
 
 .upgradePrice {
     font-size: 20px;
+    text-align: left;
+    flex: 0 0 50%;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.displayTime {
+    padding-top: 4px;
+    font-size: 15px;
+    text-align: right;
+    width: 50px;
+    flex: 0 0 50%;
+    margin-left: -15px;
 }
 
 .cpuUpgradeBtnPctOuter {
-    height: 10px;
-    background-color: lightgray;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 15px;
+    position: relative;
+    height: 30px;
+    background-color: rgb(255, 154, 154);
 }
 
 .cpuUpgradeBtnPctInner {
-    height: 10px;
-    background-color: chartreuse;
+    height: 30px;
+    background-color: rgb(136, 255, 172);
 }
 
 .canAfford {
-    color:rgb(78, 145, 12);
+    color:rgb(0, 0, 0);
 }
 .cannotAfford {
-    color:rgb(241, 30, 40);
+    color:rgb(0, 0, 0);
 }

@@ -1,5 +1,3 @@
-import { rgb2hex } from "@pixi/utils";
-import images, { icons } from "../../assets";
 import { formatGhz, formatMoney } from "../../Code/format";
 import GameData, { cpuUpgradeDefinition } from "../../Code/GameData";
 import GameState from "../../Code/GameState";
@@ -22,6 +20,7 @@ function CpuUpgradeList(): JSX.Element {
     const price = Shop.cpuPrice(upgDef.basePrice, ownedCount);
     const canAfford = GameState.current.money >= price;
     const priceClass = canAfford ? "canAfford" : "cannotAfford";
+    const boxClass = canAfford ? "boxGreen" : "boxRed";
     const name = showFully ? upgDef.name : "???";
     const displayMhz = showFully ? formatGhz(upgDef.ghz) : "?";
     const incomePerDollar = upgDef.ghz / price;
@@ -44,22 +43,19 @@ function CpuUpgradeList(): JSX.Element {
       .padStart(2, "0");
 
     let displayTime =
-      GameState.incomePerSec > 0 ? `${hours}:${minutes}:${seconds}` : "?";
+      GameState.incomePerSec > 0 ? `${hours}:${minutes}:${seconds}` : "";
 
     if (secondsLeft < 1) {
-      displayTime = "-";
+      displayTime = "";
     }
 
     const pct = Math.min(1, GameState.current.money / price);
-
-    const r = 255 - 255 * pct;
-    const g = 255 * pct;
 
     const btn = (
       <>
         <span key={upgDef.id}>
           <a
-            className="cpuUpgradeBtn"
+            className={`cpuUpgradeBtn ${boxClass}`}
             key={upgDef.id}
             onClick={canAfford ? () => onBuyClick(upgDef) : undefined}
           >
@@ -68,20 +64,22 @@ function CpuUpgradeList(): JSX.Element {
                 {name} ({ownedCount})
               </div>
               <div style={{ fontSize: "xx-small" }}>{displayMhz}</div>
-              <div>{displayTime}</div>
               <div className="cpuUpgradeBtnPctOuter">
                 <div
                   className="cpuUpgradeBtnPctInner"
                   style={{
                     width: `${pct * 100}%`,
-                    backgroundColor: `rgb(${r}, ${g}, 1)`,
                   }}
-                ></div>
+                >
+                  {" "}
+                  <div className="textInner">
+                    <div className={`upgradePrice ${priceClass}`}>
+                      ${formatMoney(price)}
+                    </div>
+                    <div className="displayTime">{displayTime}</div>
+                  </div>
+                </div>
               </div>{" "}
-              <div className={`upgradePrice ${priceClass}`}>
-                ${formatMoney(price)}
-                {/* ${price} (${(incomePerDollar * 60).toFixed(5)}/min) */}
-              </div>
             </div>{" "}
           </a>
         </span>{" "}
